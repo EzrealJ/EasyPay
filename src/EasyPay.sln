@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.168
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ezreal.EasyPay.Common", "Ezreal.EasyPay.Common\Ezreal.EasyPay.Common.csproj", "{A1428975-3AAD-4873-ADA2-38A5578319C9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ezreal.EasyPay.WeChat", "Ezreal.EasyPay.WeChat\Ezreal.EasyPay.WeChat.csproj", "{3C515DEC-3C44-4CEC-8F82-19816AF2F164}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ezreal.EasyPay.Abstractions", "Ezreal.EasyPay.Abstractions\Ezreal.EasyPay.Abstractions.csproj", "{5E6A3B78-8FF2-4563-A6CF-9DDBA47B845F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A1428975-3AAD-4873-ADA2-38A5578319C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1428975-3AAD-4873-ADA2-38A5578319C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1428975-3AAD-4873-ADA2-38A5578319C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1428975-3AAD-4873-ADA2-38A5578319C9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C515DEC-3C44-4CEC-8F82-19816AF2F164}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C515DEC-3C44-4CEC-8F82-19816AF2F164}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C515DEC-3C44-4CEC-8F82-19816AF2F164}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C515DEC-3C44-4CEC-8F82-19816AF2F164}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5E6A3B78-8FF2-4563-A6CF-9DDBA47B845F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E6A3B78-8FF2-4563-A6CF-9DDBA47B845F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E6A3B78-8FF2-4563-A6CF-9DDBA47B845F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E6A3B78-8FF2-4563-A6CF-9DDBA47B845F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {84003617-7667-4FBC-A922-C7003AF6CB4B}
+	EndGlobalSection
+EndGlobal
