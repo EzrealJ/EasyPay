@@ -8,8 +8,12 @@ using System.Threading.Tasks;
 
 namespace Ezreal.EasyPay.WeChat.Sign
 {
-    public abstract class WeChatSignProvider: ISignProvider
+    public class WeChatSignProvider: ISignProvider
     {
+        public WeChatSignProvider(WeChatSignSettings signSettings)
+        {
+            SignSettings = signSettings ?? throw new ArgumentNullException(nameof(signSettings));
+        }
 
         public WeChatSignSettings SignSettings { get; set; }
         public string SignWithKey(SortedDictionary<string, string> dictionary)

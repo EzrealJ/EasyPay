@@ -6,11 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="ApiParameterModels\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Ezreal.EasyPay.Abstractions\Ezreal.EasyPay.Abstractions.csproj" />
+    <ProjectReference Include="..\Ezreal.EasyPay.Common\Ezreal.EasyPay.Common.csproj" />
   </ItemGroup>
 
 </Project>
