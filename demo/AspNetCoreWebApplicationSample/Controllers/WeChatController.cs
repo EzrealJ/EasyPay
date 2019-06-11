@@ -31,6 +31,7 @@ namespace AspNetCoreWebApplicationSample.Controllers
         {
             try
             {
+
                 WeChatPayMicroPayResponse result = await _weChatPayContract.MicroPay(weChatSignSettings, weChatPayMicroPayRequest);
                 return result;
             }

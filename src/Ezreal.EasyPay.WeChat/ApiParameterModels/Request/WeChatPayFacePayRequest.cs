@@ -10,7 +10,7 @@ using System.Xml.Serialization;
 
 namespace Ezreal.EasyPay.WeChat.ApiParameterModels.Request
 {
-    public class WeChatPayFacePayRequest : WeChatPayRequest
+    public class WeChatPayFacePayRequest :WeChatPayServiceProviderCompatibleRequest
     {
 
         /// <summary>
@@ -21,6 +21,7 @@ namespace Ezreal.EasyPay.WeChat.ApiParameterModels.Request
         /// </summary>
         [XmlElement("device_info")]
         public string DeviceInfo { get; set; }
+
         /// <summary>
         /// 商品描述
         /// <para>
@@ -29,6 +30,7 @@ namespace Ezreal.EasyPay.WeChat.ApiParameterModels.Request
         /// </summary>
         [XmlElement("body"), MustProvide]
         public string Body { get; set; }
+
         /// <summary>
         /// 商品详情
         /// <para>请按照微信要求提供参数，EasyPay不做深入实现</para>
@@ -40,7 +42,7 @@ namespace Ezreal.EasyPay.WeChat.ApiParameterModels.Request
         /// <para>
         /// 附加数据，在查询 API 和支付通知中原样返回，该字段主要用于商户携带订单的自定义数据</para>
         /// </summary>
-        [XmlElement("attach",typeof(CDATA))]
+        [XmlElement("attach")]
         public string Attach { get; set; }
         /// <summary>
         /// 商户订单号

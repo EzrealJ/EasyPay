@@ -17,10 +17,13 @@ namespace Ezreal.EasyPay.WeChat.ApiContract
     [TraceFilter(OutputTarget = OutputTarget.Console)]
     public interface IWeChatPayContract : IHttpApi
     {
-        ITask<string> FacePay(
+        [HttpPost("pay/facepay")]
+        [XmlReturn]
+        ITask<WeChatPayFacePayResponse> FacePay(
             [XmlContent]WeChatPayFacePayRequest facePayRequest,
             [Timeout]TimeSpan? timeout = null,
             CancellationToken cancellationToken = default(CancellationToken));
+
         [HttpPost("pay/micropay")]
         [XmlReturn]
         ITask<WeChatPayMicroPayResponse> MicroPay(
@@ -28,5 +31,22 @@ namespace Ezreal.EasyPay.WeChat.ApiContract
             [XmlContent]WeChatPayMicroPayRequest microPayRequest,
             [Timeout]TimeSpan? timeout = null,
             CancellationToken cancellationToken = default(CancellationToken));
+
+        [HttpPost("pay/facepayquery")]
+        [XmlReturn]
+        ITask<WeChatPayFacePayQueryResponse> Facepayquery(
+        WeChatSignSettings weChatSignSettings,
+        [XmlContent]WeChatPayFacePayQueryRequest facePayQueryRequest,
+        [Timeout]TimeSpan? timeout = null,
+        CancellationToken cancellationToken = default(CancellationToken));
+
+        [HttpPost("secapi/pay/refund")]
+        [XmlReturn]
+        ITask<WeChatPayRefundResponse> Facepayquery(
+        WeChatSignSettings weChatSignSettings,
+        [XmlContent]WeChatPayRefundRequest refundRequest,
+        [Timeout]TimeSpan? timeout = null,
+        CancellationToken cancellationToken = default(CancellationToken));
+
     }
 }

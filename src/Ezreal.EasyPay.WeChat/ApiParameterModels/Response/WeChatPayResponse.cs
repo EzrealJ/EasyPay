@@ -2,8 +2,8 @@
 
 namespace Ezreal.EasyPay.WeChat.ApiParameterModels.Response
 {
-    [XmlRoot("xml")]
-    public class WeChatPayResponse: Abstractions.ApiParameterModels.Response.IResponseModel
+
+    public abstract class WeChatPayResponse : Abstractions.ApiParameterModels.Response.IResponseModel
     {
         /// <summary>
         /// 返回状态码
@@ -20,5 +20,14 @@ namespace Ezreal.EasyPay.WeChat.ApiParameterModels.Response
         /// </summary>
         [XmlElement("return_msg")]
         public string ReturnMsg { get; set; }
+
+        /// <summary>
+        /// 存在有效的业务响应
+        /// </summary>
+        public bool ExistsBusinessResponseContent { get => (!string.IsNullOrWhiteSpace(this.ReturnCode)) && (this.ReturnCode.ToUpper().Equals("SUCCESS")); }
+
+
+
+
     }
 }

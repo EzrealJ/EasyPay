@@ -10,18 +10,15 @@ using System.Xml.Serialization;
 
 namespace Ezreal.EasyPay.WeChat.ApiParameterModels.Request
 {
+    /// <summary>
+    /// 微信刷卡支付
+    /// </summary>
     [XmlRoot("xml")]
-    public class WeChatPayMicroPayRequest : WeChatPayRequest
+    public class WeChatPayMicroPayRequest :WeChatPayServiceProviderCompatibleRequest
     {
 
-        /// <summary>
-        /// 终端设备号
-        /// <para>
-        /// 终端设备号(商户自定义，如门店编号)
-        /// </para>
-        /// </summary>
-        [XmlElement("device_info")]
-        public string DeviceInfo { get; set; }
+
+
 
         /// <summary>
         /// 商品描述
@@ -125,7 +122,7 @@ namespace Ezreal.EasyPay.WeChat.ApiParameterModels.Request
         /// 扫码支付授权码，设备读取用户微信中的条码或者二维码信息（注：用户付款码条形码规则：18位纯数字，以10、11、12、13、14、15开头）
         /// </para>
         /// </summary>
-        [XmlElement("auth_code"),MustProvide]
+        [XmlElement("auth_code"), MustProvide]
         public string AuthCode { get; set; }
         /// <summary>
         /// 电子发票入口开放标识
@@ -141,5 +138,6 @@ namespace Ezreal.EasyPay.WeChat.ApiParameterModels.Request
         /// </summary>
         [XmlElement("scene_info")]
         public string SceneInfo { get; set; }
+
     }
 }
