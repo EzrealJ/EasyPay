@@ -7,6 +7,9 @@ using System.Xml.Serialization;
 
 namespace Ezreal.EasyPay.WeChat.ApiParameterModels.Response
 {
+    /// <summary>
+    /// 微信支付接口的通用响应模型
+    /// </summary>
     public abstract class WeChatPayGenericBusinessResponse : WeChatPayResponse
     {
         /// <summary>
@@ -22,9 +25,6 @@ namespace Ezreal.EasyPay.WeChat.ApiParameterModels.Response
         /// </summary>
         [XmlElement("mch_id")]
         public string MchId { get; set; }
-
-
-
 
 
         /// <summary>

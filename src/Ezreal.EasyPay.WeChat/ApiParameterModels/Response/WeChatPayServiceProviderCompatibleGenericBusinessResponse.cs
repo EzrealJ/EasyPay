@@ -9,7 +9,7 @@ namespace Ezreal.EasyPay.WeChat.ApiParameterModels.Response
 {
 
     /// <summary>
-    /// 微信支付服务商兼容接口的响应模型
+    /// 微信支付服务商兼容接口的通用响应模型
     /// </summary>
     public abstract class WeChatPayServiceProviderCompatibleGenericBusinessResponse : WeChatPayGenericBusinessResponse
     {

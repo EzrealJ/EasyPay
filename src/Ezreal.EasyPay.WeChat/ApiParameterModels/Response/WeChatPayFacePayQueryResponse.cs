@@ -10,7 +10,7 @@ namespace Ezreal.EasyPay.WeChat.ApiParameterModels.Response
     /// <summary>
     /// 微信查询人脸支付的响应参数模型
     /// </summary>
-    public class WeChatPayFacePayQueryResponse : WeChatPayServiceProviderCompatibleGenericBusinessResponse
+    public class WeChatPayFacePayQueryResponse : WeChatPayServiceProviderCompatibleGenericBusinessResponse, ISupportCompleted
     {
         /// <summary>
         /// 设备号

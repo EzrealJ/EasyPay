@@ -10,7 +10,7 @@ using System.Xml.Serialization;
 
 namespace Ezreal.EasyPay.WeChat.ApiParameterModels.Request
 {
-    public class WeChatPayFacePayRequest :WeChatPayServiceProviderCompatibleRequest
+    public class WeChatPayFacePayRequest :WeChatPayServiceProviderCompatibleRequest, ISupportCompleted
     {
 
         /// <summary>

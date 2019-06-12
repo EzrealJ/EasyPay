@@ -14,7 +14,7 @@ namespace Ezreal.EasyPay.WeChat.ApiParameterModels.Request
     /// 微信刷卡支付
     /// </summary>
     [XmlRoot("xml")]
-    public class WeChatPayMicroPayRequest :WeChatPayServiceProviderCompatibleRequest
+    public class WeChatPayMicroPayRequest :WeChatPayServiceProviderCompatibleRequest, ISupportCompleted
     {
 
 

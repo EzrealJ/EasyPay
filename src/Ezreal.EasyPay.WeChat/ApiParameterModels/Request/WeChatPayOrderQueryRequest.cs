@@ -26,10 +26,5 @@ namespace Ezreal.EasyPay.WeChat.ApiParameterModels.Request
 
 
 
-        public string GetRequestUrl()
-        {
-            return "https://api.mch.weixin.qq.com/pay/orderquery";
-        }
-
     }
 }

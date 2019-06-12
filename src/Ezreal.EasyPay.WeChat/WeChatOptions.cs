@@ -10,6 +10,7 @@ namespace Ezreal.EasyPay.WeChat
 {
     public class WeChatOptions : IOptions
     {
+        public static  WeChatOptions DefaultInstance { get; set; } = new WeChatOptions();
         /// <summary>
         /// 应用账号(公众账号ID/小程序ID/企业号CorpId)
         /// </summary>

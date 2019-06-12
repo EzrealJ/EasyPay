@@ -3,7 +3,7 @@
 namespace Ezreal.EasyPay.WeChat.ApiParameterModels.Response
 {
     [XmlRoot("xml")]
-    public class WeChatPayReverseResponse : WeChatPayServiceProviderCompatibleGenericBusinessResponse, ISupportCompleted
+    public class WeChatPayFacePayReverseResponse : WeChatPayServiceProviderCompatibleGenericBusinessResponse, ISupportCompleted
     {
         /// <summary>
         /// 是否重调	
