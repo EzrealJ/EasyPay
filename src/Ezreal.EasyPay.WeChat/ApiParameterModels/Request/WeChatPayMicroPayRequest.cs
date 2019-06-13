@@ -11,7 +11,7 @@ using System.Xml.Serialization;
 namespace Ezreal.EasyPay.WeChat.ApiParameterModels.Request
 {
     /// <summary>
-    /// 微信刷卡支付
+    /// 微信支付刷卡支付请求模型
     /// </summary>
     [XmlRoot("xml")]
     public class WeChatPayMicroPayRequest :WeChatPayServiceProviderCompatibleRequest, ISupportCompleted

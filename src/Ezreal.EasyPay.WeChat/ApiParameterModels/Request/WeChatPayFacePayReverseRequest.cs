@@ -5,8 +5,9 @@ using Ezreal.EasyPay.WeChat.ApiParameterModels.Response;
 namespace Ezreal.EasyPay.WeChat.ApiParameterModels.Request
 {
     /// <summary>
-    /// 撤销人脸支付订单
+    /// 微信支付人脸支付撤销订单请求模型
     /// </summary>
+    [XmlRoot("xml")]
     public class WeChatPayFacePayReverseRequest : WeChatPayServiceProviderCompatibleRequest, ISupportCompleted
     {
 
@@ -24,14 +25,6 @@ namespace Ezreal.EasyPay.WeChat.ApiParameterModels.Request
         public string OutTradeNo { get; set; }
 
 
-        #region IWeChatPayCertificateRequest Members
 
-        public string GetRequestUrl()
-        {
-            return "https://api.mch.weixin.qq.com/secapi/pay/reverse";
-        }
-
-
-        #endregion
     }
 }

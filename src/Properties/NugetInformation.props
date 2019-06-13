@@ -1,0 +1,14 @@
+﻿  <Project>
+    <PropertyGroup>
+        <TargetFrameworks>net45;netstandard2.0</TargetFrameworks>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+        <Authors>Ezreal</Authors>
+        <Version>0.1.1-preview</Version>
+        <Description>基于WebClient.JIT的第三方支付接入库</Description>
+        <Copyright>Ezreal</Copyright>
+        <PackageProjectUrl>https://github.com/EzrealJ/EasyPay</PackageProjectUrl>
+        <PackageLicenseUrl>https://github.com/EzrealJ/EasyPay/blob/master/LICENSE</PackageLicenseUrl>
+        <PackageTags>EasyPay</PackageTags>
+    </PropertyGroup>
+  </Project>

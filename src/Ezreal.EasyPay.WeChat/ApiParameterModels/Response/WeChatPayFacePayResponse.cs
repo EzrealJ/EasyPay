@@ -8,8 +8,9 @@ using System.Xml.Serialization;
 namespace Ezreal.EasyPay.WeChat.ApiParameterModels.Response
 {
     /// <summary>
-    /// 微信发起人脸支付的响应参数模型
+    /// 微信支付人脸支付发起支付响应模型
     /// </summary>
+    [XmlRoot("xml")]
     public class WeChatPayFacePayResponse:WeChatPayServiceProviderCompatibleGenericBusinessResponse, ISupportCompleted
     {
         /// <summary>

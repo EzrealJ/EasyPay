@@ -9,8 +9,11 @@ using WebApiClient.DataAnnotations;
 
 namespace Ezreal.EasyPay.WeChat.ApiParameterModels.Request
 {
-
-    public class WeChatPayRequest: Abstractions.ApiParameterModels.Request.IRequestModel
+    /// <summary>
+    /// 微信支付请求模型
+    /// </summary>
+    [XmlRoot("xml")]
+    public abstract class WeChatPayRequest: Abstractions.ApiParameterModels.Request.IRequestModel
     {
         /// <summary>
         /// 公众账号ID

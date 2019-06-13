@@ -5,6 +5,9 @@ using System.Xml.Serialization;
 
 namespace Ezreal.EasyPay.WeChat.ApiParameterModels.Response
 {
+    /// <summary>
+    /// 微信支付订单查询响应模型
+    /// </summary>
     [XmlRoot("xml")]
     public class WeChatPayOrderQueryResponse : WeChatPayServiceProviderCompatibleGenericBusinessResponse,IWeChatPayXmlReturnListPropertParser,ISupportCompleted
     {

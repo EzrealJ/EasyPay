@@ -2,6 +2,9 @@
 
 namespace Ezreal.EasyPay.WeChat.ApiParameterModels.Response
 {
+    /// <summary>
+    /// 微信支付人脸支付撤销订单响应模型
+    /// </summary>
     [XmlRoot("xml")]
     public class WeChatPayFacePayReverseResponse : WeChatPayServiceProviderCompatibleGenericBusinessResponse, ISupportCompleted
     {

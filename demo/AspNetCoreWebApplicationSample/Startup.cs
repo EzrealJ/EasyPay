@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
+using Ezreal.EasyPay.WeChat;
 using Ezreal.EasyPay.WeChat.ApiContract;
 using Ezreal.EasyPay.WeChat.Filter;
 using Microsoft.AspNetCore.Builder;
@@ -22,7 +24,7 @@ namespace AspNetCoreWebApplicationSample
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddHttpApi<IWeChatPayContract>().ConfigureHttpApiConfig(config=>config.GlobalFilters.Add(new WeChatSignFilter()));
+
             services.AddMvc();
             //注册Swagger生成器，定义一个和多个Swagger 文档
             services.AddSwaggerGen(option =>
@@ -44,6 +46,21 @@ namespace AspNetCoreWebApplicationSample
                 option.IncludeXmlComments(xmlPath);
 
             });
+            WeChatOptions.DefaultInstance = new Ezreal.EasyPay.WeChat.WeChatOptions()
+            {
+                //配置默认配置
+            };
+            services.AddTransient<Ezreal.EasyPay.WeChat.Api.WeChatPayClient>();
+
+            //此过程可以不在此处进行
+            WeChatClientFactroy.Configure().ConfigureHttpMessageHandler(() =>
+            {
+                System.Net.Http.HttpClientHandler handler = new System.Net.Http.HttpClientHandler();
+                handler.ClientCertificates.Add(new X509Certificate2(@"你的p12证书", "商户号", X509KeyStorageFlags.MachineKeySet | X509KeyStorageFlags.PersistKeySet | X509KeyStorageFlags.Exportable));
+                return handler;
+            });
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

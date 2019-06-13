@@ -1,5 +1,6 @@
 ﻿using Ezreal.EasyPay.WeChat.ApiParameterModels.Request;
 using Ezreal.EasyPay.WeChat.ApiParameterModels.Response;
+using Ezreal.EasyPay.WeChat.Attributes;
 using Ezreal.EasyPay.WeChat.Sign;
 using System;
 using System.Collections.Generic;
@@ -15,11 +16,12 @@ namespace Ezreal.EasyPay.WeChat.ApiContract
 {
     [HttpHost("https://api.mch.weixin.qq.com/")]
     [TraceFilter(OutputTarget = OutputTarget.Console)]
+    [Ezreal.EasyPay.WeChat.Filter.WeChatSignFilter]
     public interface IWeChatPayContract : IHttpApi
     {
 
         [HttpPost("pay/micropay")]
-        [XmlReturn]
+        [WeChatPayXmlReturn]
         ITask<WeChatPayMicroPayResponse> MicroPay(
         WeChatSignSettings weChatSignSettings,
         [XmlContent]WeChatPayMicroPayRequest microPayRequest,
@@ -27,23 +29,25 @@ namespace Ezreal.EasyPay.WeChat.ApiContract
         CancellationToken cancellationToken = default(CancellationToken));
 
         [HttpPost("pay/facepay")]
-        [XmlReturn]
+        [WeChatPayXmlReturn]
         ITask<WeChatPayFacePayResponse> FacePay(
              WeChatSignSettings weChatSignSettings,
             [XmlContent]WeChatPayFacePayRequest facePayRequest,
             [Timeout]TimeSpan? timeout = null,
             CancellationToken cancellationToken = default(CancellationToken));
 
+
         [HttpPost("pay/orderquery")]
-        [Attributes.WeChatPayXmlReturn]
+        [WeChatPayXmlReturn]
         ITask<WeChatPayOrderQueryResponse> OrderQuery(
         WeChatSignSettings weChatSignSettings,
         [XmlContent]WeChatPayOrderQueryRequest facePayQueryRequest,
         [Timeout]TimeSpan? timeout = null,
         CancellationToken cancellationToken = default(CancellationToken));
 
+
         [HttpPost("pay/facepayquery")]
-        [XmlReturn]
+        [WeChatPayXmlReturn]
         ITask<WeChatPayFacePayQueryResponse> FacePayQuery(
         WeChatSignSettings weChatSignSettings,
         [XmlContent]WeChatPayFacePayQueryRequest facePayQueryRequest,
@@ -52,18 +56,17 @@ namespace Ezreal.EasyPay.WeChat.ApiContract
 
 
 
-
-
         [HttpPost("secapi/pay/facepayreverse")]
-        [XmlReturn]
+        [WeChatPayXmlReturn]
         ITask<WeChatPayFacePayReverseResponse> FacePayReverse(
         WeChatSignSettings weChatSignSettings,
         [XmlContent]WeChatPayFacePayReverseRequest facePayReverseRequest,
         [Timeout]TimeSpan? timeout = null,
         CancellationToken cancellationToken = default(CancellationToken));
 
+
         [HttpPost("secapi/pay/reverse")]
-        [XmlReturn]
+        [WeChatPayXmlReturn]
         ITask<WeChatPayReverseResponse> Reverse(
         WeChatSignSettings weChatSignSettings,
         [XmlContent]WeChatPayReverseRequest facePayReverseRequest,
@@ -72,9 +75,8 @@ namespace Ezreal.EasyPay.WeChat.ApiContract
 
 
 
-
         [HttpPost("secapi/pay/refund")]
-        [XmlReturn]
+        [WeChatPayXmlReturn]
         ITask<WeChatPayRefundResponse> Refund(
         WeChatSignSettings weChatSignSettings,
         [XmlContent]WeChatPayRefundRequest refundRequest,
@@ -83,7 +85,7 @@ namespace Ezreal.EasyPay.WeChat.ApiContract
 
 
         [HttpPost("pay/refundquery")]
-        [Attributes.WeChatPayXmlReturn]
+        [WeChatPayXmlReturn]
         ITask<WeChatPayRefundQueryResponse> RefundQuery(
         WeChatSignSettings weChatSignSettings,
         [XmlContent]WeChatPayRefundQueryRequest refundQueryRequest,

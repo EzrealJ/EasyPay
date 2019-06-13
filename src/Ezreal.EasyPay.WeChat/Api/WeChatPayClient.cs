@@ -12,18 +12,19 @@ using WebApiClient;
 
 namespace Ezreal.EasyPay.WeChat.Api
 {
+    /// <summary>
+    /// 微信支付Client
+    /// </summary>
     public class WeChatPayClient
     {
-        public WeChatPayClient(IWeChatPayContract weChatPayContract)
-        {
-            WeChatPayContract = weChatPayContract ?? HttpApi.Resolve<IWeChatPayContract>();
-        }
+        private IWeChatPayContract _weChatPayContract;
 
-        public virtual IWeChatPayContract WeChatPayContract { get; protected set; }
+
+        public virtual IWeChatPayContract WeChatPayContract { get => _weChatPayContract ?? HttpApi.Resolve<IWeChatPayContract>(); protected set => _weChatPayContract = value; }
         public virtual Func<WeChatOptions> GetDefaultWeChatOptions { get; set; } = () => WeChatOptions.DefaultInstance;
 
         /// <summary>
-        /// 应用默认的微信配置
+        /// 应用默认的商户配置
         /// <para>
         /// 当AppId和MchId未被提供时生效
         /// </para>
@@ -31,9 +32,14 @@ namespace Ezreal.EasyPay.WeChat.Api
         /// <typeparam name="TWeChatPayRequest"></typeparam>
         /// <param name="weChatPayRequest"></param>
         /// <returns></returns>
-        protected virtual TWeChatPayRequest ApplyDefaultWeChatOptions<TWeChatPayRequest>(TWeChatPayRequest weChatPayRequest)
+        protected virtual TWeChatPayRequest ApplyDefaultMerchantSettings<TWeChatPayRequest>(TWeChatPayRequest weChatPayRequest)
             where TWeChatPayRequest : WeChatPayRequest
         {
+            if (weChatPayRequest == null)
+            {
+                throw new ArgumentNullException(nameof(weChatPayRequest));
+            }
+
             WeChatOptions defaultWeChatOptions = GetDefaultWeChatOptions();
             weChatPayRequest.AppId = weChatPayRequest.AppId ?? defaultWeChatOptions.AppId;
             weChatPayRequest.MchId = weChatPayRequest.MchId ?? defaultWeChatOptions.MchId;
@@ -57,12 +63,23 @@ namespace Ezreal.EasyPay.WeChat.Api
         }
 
         /// <summary>
-        /// 尝试从指定的工厂解析<see cref="IWeChatPayContract"/>
+        /// 尝试从指定的商户工厂解析<see cref="IWeChatPayContract"/>
         /// </summary>
-        /// <param name="factoryName"></param>
+        /// <param name="merchantId">商户号</param>
         /// <returns></returns>
-        protected virtual IWeChatPayContract ResolveFromTargetFactory(string factoryName) => HttpApi.Resolve<IWeChatPayContract>(factoryName);
+        protected virtual IWeChatPayContract ResolveFromTargetMerchantFactory(string merchantId) => HttpApi.Resolve<IWeChatPayContract>($"{merchantId}_{nameof(IWeChatPayContract)}");
 
+        public ITask<WeChatPayMicroPayResponse> MicroPay(
+        WeChatPayMicroPayRequest microPayRequest,
+        WeChatSignSettings weChatSignSettings = null,
+        TimeSpan? timeout = null,
+        CancellationToken cancellationToken = default(CancellationToken))
+        {
+            weChatSignSettings = ApplyDefaultSignSettings(weChatSignSettings);
+            ApplyDefaultMerchantSettings(microPayRequest);
+            WeChatPayContract = WeChatPayContract ?? ResolveFromTargetMerchantFactory(microPayRequest.MchId);
+            return WeChatPayContract.MicroPay(weChatSignSettings, microPayRequest, timeout, cancellationToken);
+        }
 
         public ITask<WeChatPayFacePayResponse> FacePay(
         WeChatPayFacePayRequest facePayRequest,
@@ -70,39 +87,89 @@ namespace Ezreal.EasyPay.WeChat.Api
         TimeSpan? timeout = null,
         CancellationToken cancellationToken = default(CancellationToken))
         {
-            ApplyDefaultSignSettings(weChatSignSettings);
-            ApplyDefaultWeChatOptions(facePayRequest);
-            WeChatPayContract = WeChatPayContract ?? ResolveFromTargetFactory(facePayRequest.MchId);
+            weChatSignSettings = ApplyDefaultSignSettings(weChatSignSettings);
+            ApplyDefaultMerchantSettings(facePayRequest);
+            WeChatPayContract = WeChatPayContract ?? ResolveFromTargetMerchantFactory(facePayRequest.MchId);
             return WeChatPayContract.FacePay(weChatSignSettings, facePayRequest, timeout, cancellationToken);
         }
 
-
+        public ITask<WeChatPayOrderQueryResponse> OrderQuery(
+        WeChatPayOrderQueryRequest orderQueryRequest,
+        WeChatSignSettings weChatSignSettings = null,
+        TimeSpan? timeout = null,
+        CancellationToken cancellationToken = default(CancellationToken))
+        {
+            weChatSignSettings = ApplyDefaultSignSettings(weChatSignSettings);
+            ApplyDefaultMerchantSettings(orderQueryRequest);
+            WeChatPayContract = WeChatPayContract ?? ResolveFromTargetMerchantFactory(orderQueryRequest.MchId);
+            return WeChatPayContract.OrderQuery(weChatSignSettings, orderQueryRequest, timeout, cancellationToken);
+        }
         public ITask<WeChatPayFacePayQueryResponse> FacePayQuery(
         WeChatPayFacePayQueryRequest facePayQueryRequest,
         WeChatSignSettings weChatSignSettings = null,
         TimeSpan? timeout = null,
         CancellationToken cancellationToken = default(CancellationToken))
         {
-            ApplyDefaultSignSettings(weChatSignSettings);
-            ApplyDefaultWeChatOptions(facePayQueryRequest);
-            WeChatPayContract = WeChatPayContract ?? ResolveFromTargetFactory(facePayQueryRequest.MchId);
+            weChatSignSettings = ApplyDefaultSignSettings(weChatSignSettings);
+            ApplyDefaultMerchantSettings(facePayQueryRequest);
+            WeChatPayContract = WeChatPayContract ?? ResolveFromTargetMerchantFactory(facePayQueryRequest.MchId);
             return WeChatPayContract.FacePayQuery(weChatSignSettings, facePayQueryRequest, timeout, cancellationToken);
         }
 
 
-        public ITask<WeChatPayMicroPayResponse> FacePay(
-        WeChatPayMicroPayRequest microPayRequest,
+        public ITask<WeChatPayFacePayReverseResponse> FacePayReverse(
+        WeChatPayFacePayReverseRequest facePayReverseRequest,
         WeChatSignSettings weChatSignSettings = null,
         TimeSpan? timeout = null,
         CancellationToken cancellationToken = default(CancellationToken))
         {
-            
-            ApplyDefaultSignSettings(weChatSignSettings);
-            ApplyDefaultWeChatOptions(microPayRequest);
-            WeChatPayContract = WeChatPayContract ?? ResolveFromTargetFactory(microPayRequest.MchId);
-            return WeChatPayContract.MicroPay(weChatSignSettings, microPayRequest, timeout, cancellationToken);
+
+            weChatSignSettings = ApplyDefaultSignSettings(weChatSignSettings);
+            ApplyDefaultMerchantSettings(facePayReverseRequest);
+            WeChatPayContract = WeChatPayContract ?? ResolveFromTargetMerchantFactory(facePayReverseRequest.MchId);
+            return WeChatPayContract.FacePayReverse(weChatSignSettings, facePayReverseRequest, timeout, cancellationToken);
         }
 
 
+        public ITask<WeChatPayReverseResponse> Reverse(
+        WeChatPayReverseRequest reverseRequest,
+        WeChatSignSettings weChatSignSettings = null,
+        TimeSpan? timeout = null,
+        CancellationToken cancellationToken = default(CancellationToken))
+        {
+
+            weChatSignSettings = ApplyDefaultSignSettings(weChatSignSettings);
+            ApplyDefaultMerchantSettings(reverseRequest);
+            WeChatPayContract = WeChatPayContract ?? ResolveFromTargetMerchantFactory(reverseRequest.MchId);
+            return WeChatPayContract.Reverse(weChatSignSettings, reverseRequest, timeout, cancellationToken);
+        }
+
+        public ITask<WeChatPayRefundResponse> Refund(
+
+          WeChatPayRefundRequest refundRequest,
+           WeChatSignSettings weChatSignSettings = null,
+          TimeSpan? timeout = null,
+          CancellationToken cancellationToken = default(CancellationToken))
+        {
+
+            weChatSignSettings = ApplyDefaultSignSettings(weChatSignSettings);
+            ApplyDefaultMerchantSettings(refundRequest);
+            WeChatPayContract = WeChatPayContract ?? ResolveFromTargetMerchantFactory(refundRequest.MchId);
+            return WeChatPayContract.Refund(weChatSignSettings, refundRequest, timeout, cancellationToken);
+        }
+
+
+        public ITask<WeChatPayRefundQueryResponse> RefundQuery(
+
+        WeChatPayRefundQueryRequest refundQueryRequest,
+         WeChatSignSettings weChatSignSettings = null,
+        TimeSpan? timeout = null,
+        CancellationToken cancellationToken = default(CancellationToken))
+        {
+            weChatSignSettings = ApplyDefaultSignSettings(weChatSignSettings);
+            ApplyDefaultMerchantSettings(refundQueryRequest);
+            WeChatPayContract = WeChatPayContract ?? ResolveFromTargetMerchantFactory(refundQueryRequest.MchId);
+            return WeChatPayContract.RefundQuery(weChatSignSettings, refundQueryRequest, timeout, cancellationToken);
+        }
     }
 }

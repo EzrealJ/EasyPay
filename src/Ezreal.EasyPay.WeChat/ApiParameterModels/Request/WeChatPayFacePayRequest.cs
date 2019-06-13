@@ -10,6 +10,10 @@ using System.Xml.Serialization;
 
 namespace Ezreal.EasyPay.WeChat.ApiParameterModels.Request
 {
+    /// <summary>
+    /// 微信支付人脸支付发起支付请求模型
+    /// </summary>
+    [XmlRoot("xml")]
     public class WeChatPayFacePayRequest :WeChatPayServiceProviderCompatibleRequest, ISupportCompleted
     {
 

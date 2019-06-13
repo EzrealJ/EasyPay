@@ -10,15 +10,16 @@ using WebApiClient.Contexts;
 
 namespace Ezreal.EasyPay.WeChat.Filter
 {
-    public class WeChatSignFilter : SignFilterAbstract
+    /// <summary>
+    /// 微信签名拦截器特性
+    /// </summary>
+    public class WeChatSignFilterAttribute : SignFilterAbstractAttribute
     {
         public override async Task SignRequestAsync(ApiActionContext context)
         {
             WeChatSignSettings signSettings = context.ApiActionDescriptor.Arguments.FirstOrDefault(arg => arg is WeChatSignSettings) as WeChatSignSettings;
             string xmlstring = await context.RequestMessage.Content.ReadAsStringAsync();
             XDocument xml = XDocument.Parse(xmlstring);
-            //xml.Root.Name = "xml";
-
             XElement bodyDoc = xml.Root;
             SortedDictionary<string, string> parameters = new SortedDictionary<string, string>();
             foreach (XElement element in bodyDoc.Elements())

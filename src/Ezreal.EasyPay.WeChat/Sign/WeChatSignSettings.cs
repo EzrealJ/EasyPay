@@ -1,4 +1,5 @@
-﻿using Ezreal.EasyPay.Abstractions.Sign;
+﻿using Ezreal.EasyPay.Abstractions.Enums;
+using Ezreal.EasyPay.Abstractions.Sign;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +18,6 @@ namespace Ezreal.EasyPay.WeChat.Sign
         public string Secret { get; set; }
 
         [IgnoreSerialized]
-        public SignType SignType { get; set; }
+        public EnumSignType SignType { get; set; }
     }
 }

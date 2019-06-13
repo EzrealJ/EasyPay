@@ -5,7 +5,7 @@ using Ezreal.EasyPay.WeChat.ApiParameterModels.Response;
 namespace Ezreal.EasyPay.WeChat.ApiParameterModels.Request
 {
     /// <summary>
-    /// 申请退款
+    /// 微信支付申请退款请求模型
     /// </summary>
     [XmlRoot("xml")]
     public class WeChatPayRefundRequest:WeChatPayServiceProviderCompatibleRequest
@@ -65,14 +65,5 @@ namespace Ezreal.EasyPay.WeChat.ApiParameterModels.Request
         [XmlElement("notify_url")]
         public string NotifyUrl { get; set; }
 
-        #region IWeChatPayCertificateRequest Members
-
-        public string GetRequestUrl()
-        {
-            return "https://api.mch.weixin.qq.com/secapi/pay/refund";
-        }
-
-
-        #endregion
     }
 }

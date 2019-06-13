@@ -8,8 +8,12 @@ using WebApiClient.Contexts;
 
 namespace Ezreal.EasyPay.Abstractions.Filter
 {
-    public abstract class SignFilterAbstract : IApiActionFilter
+    public abstract class SignFilterAbstractAttribute : Attribute, IApiActionFilterAttribute
     {
+        public int OrderIndex { get; protected set; }
+
+        public bool AllowMultiple { get; protected set; }
+
         public async Task OnBeginRequestAsync(ApiActionContext context)
         {
 

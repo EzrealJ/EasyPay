@@ -6,7 +6,7 @@ using Ezreal.EasyPay.WeChat.ApiParameterModels.Response;
 namespace Ezreal.EasyPay.WeChat.ApiParameterModels.Request
 {
     /// <summary>
-    /// 查询订单
+    /// 微信支付订单查询请求模型
     /// </summary>
     [XmlRoot("xml")]
     public class WeChatPayOrderQueryRequest : WeChatPayServiceProviderCompatibleRequest

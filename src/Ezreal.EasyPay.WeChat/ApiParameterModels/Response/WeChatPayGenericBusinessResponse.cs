@@ -10,6 +10,7 @@ namespace Ezreal.EasyPay.WeChat.ApiParameterModels.Response
     /// <summary>
     /// 微信支付接口的通用响应模型
     /// </summary>
+    [XmlRoot("xml")]
     public abstract class WeChatPayGenericBusinessResponse : WeChatPayResponse
     {
         /// <summary>
@@ -65,6 +66,7 @@ namespace Ezreal.EasyPay.WeChat.ApiParameterModels.Response
         /// 等效于return_code=="SUCCESS"且result_code=="SUCCESS"
         /// </para>
         /// </summary>
+        [XmlIgnore]
         public bool IsEffectiveResult
         {
             get =>

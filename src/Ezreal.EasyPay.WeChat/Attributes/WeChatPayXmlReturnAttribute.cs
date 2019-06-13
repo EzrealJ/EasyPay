@@ -1,4 +1,6 @@
-﻿using Ezreal.EasyPay.WeChat.ApiParameterModels.Response;
+﻿using Ezreal.EasyPay.Abstractions.Exceptions;
+using Ezreal.EasyPay.WeChat.ApiParameterModels.Response;
+using Ezreal.EasyPay.WeChat.Sign;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +25,33 @@ namespace Ezreal.EasyPay.WeChat.Attributes
             IEnumerable<XElement> elements = XDocument.Parse(xml)?.Root?.Elements();
             if (elements != null && elements.Any())
             {
+                if (result is WeChat.ApiParameterModels.Response.WeChatPayResponse weChatPayResponse)
+                {
+                    weChatPayResponse.OriginalContent = xml;
+                }
+
+                {//验签
+                    string returnSign = elements.FirstOrDefault(e => e.Name == "sign")?.Value;
+                    if (!string.IsNullOrWhiteSpace(returnSign))
+                    {
+                        WeChatSignSettings signSettings = context.ApiActionDescriptor.Arguments.FirstOrDefault(arg => arg is WeChatSignSettings) as WeChatSignSettings;
+                        SortedDictionary<string, string> parameters = new SortedDictionary<string, string>();
+                        foreach (XElement element in elements)
+                        {
+                            if (!string.IsNullOrEmpty(element.Name.LocalName) && !string.IsNullOrEmpty(element.Value))
+                            {
+                                parameters.Add(element.Name.LocalName, element.Value);
+                            }
+                        }
+                        string sign = new WeChatSignProvider(signSettings).SignWithKey(parameters);
+
+                        if (sign != returnSign)
+                        {
+                            throw new CheckSignException($"targetSign:{sign} != {returnSign}");
+                        }
+                    }
+                }
+
                 if (result is IWeChatPayXmlReturnListPropertParser weChatPayXmlReturnListPropertParser)
                 {
                     weChatPayXmlReturnListPropertParser.ParseListPropert(elements);

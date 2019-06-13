@@ -31,9 +31,9 @@ namespace Ezreal.EasyPay.WeChat
         /// </summary>
         public string Key { get; set; }
 
-        /// <summary>
-        /// 日志等级
-        /// </summary>
-        public LogLevel LogLevel { get; set; } = LogLevel.Information;
+        ///// <summary>
+        ///// 日志等级
+        ///// </summary>
+        //public LogLevel LogLevel { get; set; } = LogLevel.Information;
     }
 }

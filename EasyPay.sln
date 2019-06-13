@@ -15,7 +15,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ezreal.EasyPay.Common", "sr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ezreal.EasyPay.WeChat", "src\Ezreal.EasyPay.WeChat\Ezreal.EasyPay.WeChat.csproj", "{5E8E0618-C30C-4CEE-948A-1FF916C63DBC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNetCoreWebApplicationSample", "demo\AspNetCoreWebApplicationSample\AspNetCoreWebApplicationSample.csproj", "{08A1376A-79F9-4C35-A187-693E7D8F22BB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetCoreWebApplicationSample", "demo\AspNetCoreWebApplicationSample\AspNetCoreWebApplicationSample.csproj", "{08A1376A-79F9-4C35-A187-693E7D8F22BB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp", "demo\ConsoleApp\ConsoleApp.csproj", "{3D2D9B52-7E04-4D3D-A5B0-1537AEBC7FFE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{08A1376A-79F9-4C35-A187-693E7D8F22BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{08A1376A-79F9-4C35-A187-693E7D8F22BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{08A1376A-79F9-4C35-A187-693E7D8F22BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D2D9B52-7E04-4D3D-A5B0-1537AEBC7FFE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D2D9B52-7E04-4D3D-A5B0-1537AEBC7FFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D2D9B52-7E04-4D3D-A5B0-1537AEBC7FFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D2D9B52-7E04-4D3D-A5B0-1537AEBC7FFE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -48,6 +54,7 @@ Global
 		{84043F76-FD5A-49AD-ABA6-B18B2BC2270B} = {74D580D2-AA27-491B-949E-8E27675963C9}
 		{5E8E0618-C30C-4CEE-948A-1FF916C63DBC} = {74D580D2-AA27-491B-949E-8E27675963C9}
 		{08A1376A-79F9-4C35-A187-693E7D8F22BB} = {D0E8B847-F5FA-432D-A7B6-150AD2003F3F}
+		{3D2D9B52-7E04-4D3D-A5B0-1537AEBC7FFE} = {D0E8B847-F5FA-432D-A7B6-150AD2003F3F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {84003617-7667-4FBC-A922-C7003AF6CB4B}
