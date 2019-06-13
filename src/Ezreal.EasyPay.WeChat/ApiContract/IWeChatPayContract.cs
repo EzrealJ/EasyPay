@@ -34,6 +34,13 @@ namespace Ezreal.EasyPay.WeChat.ApiContract
             [Timeout]TimeSpan? timeout = null,
             CancellationToken cancellationToken = default(CancellationToken));
 
+        [HttpPost("pay/orderquery")]
+        [Attributes.WeChatPayXmlReturn]
+        ITask<WeChatPayOrderQueryResponse> OrderQuery(
+        WeChatSignSettings weChatSignSettings,
+        [XmlContent]WeChatPayOrderQueryRequest facePayQueryRequest,
+        [Timeout]TimeSpan? timeout = null,
+        CancellationToken cancellationToken = default(CancellationToken));
 
         [HttpPost("pay/facepayquery")]
         [XmlReturn]
@@ -44,13 +51,7 @@ namespace Ezreal.EasyPay.WeChat.ApiContract
         CancellationToken cancellationToken = default(CancellationToken));
 
 
-        [HttpPost("pay/orderquery")]
-        [Attributes.WeChatPayXmlReturn]
-        ITask<WeChatPayOrderQueryResponse> OrderQuery(
-        WeChatSignSettings weChatSignSettings,
-        [XmlContent]WeChatPayOrderQueryRequest facePayQueryRequest,
-        [Timeout]TimeSpan? timeout = null,
-        CancellationToken cancellationToken = default(CancellationToken));
+
 
 
         [HttpPost("secapi/pay/facepayreverse")]

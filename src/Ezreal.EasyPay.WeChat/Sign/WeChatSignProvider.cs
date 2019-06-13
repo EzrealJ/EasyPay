@@ -1,4 +1,5 @@
-﻿using Ezreal.EasyPay.Abstractions.Sign;
+﻿using Ezreal.EasyPay.Abstractions.Enums;
+using Ezreal.EasyPay.Abstractions.Sign;
 using Ezreal.EasyPay.Common.Security;
 using System;
 using System.Collections.Generic;
@@ -29,9 +30,9 @@ namespace Ezreal.EasyPay.WeChat.Sign
             var signContent = sb.Append("key=").Append(SignSettings.Key).ToString();
             switch (SignSettings.SignType)
             {
-                case SignType.MD5:
+                case EnumSignType.MD5:
                     return MD5Hash.HashToHex(signContent).ToUpper();
-                case SignType.HMACSHA256:
+                case EnumSignType.HMACSHA256:
                     return HMACSHA256Hash.HashString(signContent, SignSettings.Key).ToUpper();
                 default:
                     break;
