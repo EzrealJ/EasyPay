@@ -130,8 +130,15 @@ namespace Ezreal.EasyPay.WeChat.ApiParameterModels.Response
         [XmlElement("time_end")]
         public string TimeEnd { get; set; }
 
+        /// <summary>
+        /// 是否需要重试
+        /// </summary>
+        [XmlIgnore]
+        public bool NeedReCall => (!string.IsNullOrWhiteSpace(this.TradeState))
+            && NeedReCallStates.Contains(this.TradeState);
 
 
+        private string[] NeedReCallStates = { "USERPAYING", "NOTPAY" };
 
 
 

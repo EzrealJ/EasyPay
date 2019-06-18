@@ -1,5 +1,6 @@
 ﻿using Ezreal.EasyPay.WeChat.Domain;
 using System.Collections.Generic;
+using System.Linq;
 using System.Xml.Linq;
 using System.Xml.Serialization;
 
@@ -149,5 +150,16 @@ namespace Ezreal.EasyPay.WeChat.ApiParameterModels.Response
             var parser = new Parser.WeChatPayListPropertyParser();
             CouponInfos = parser.Parse<CouponInfo, object>(elements);
         }
+
+
+        /// <summary>
+        /// 是否需要重试
+        /// </summary>
+        [XmlIgnore]
+        public bool NeedReCall => (!string.IsNullOrWhiteSpace(this.TradeState))
+            && NeedReCallStates.Contains(this.TradeState);
+
+
+        private string[] NeedReCallStates = { "USERPAYING", "NOTPAY" };
     }
 }
