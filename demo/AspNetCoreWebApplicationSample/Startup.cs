@@ -46,19 +46,16 @@ namespace AspNetCoreWebApplicationSample
                 option.IncludeXmlComments(xmlPath);
 
             });
-            WeChatOptions.DefaultInstance = new Ezreal.EasyPay.WeChat.WeChatOptions()
+            WeChatPayOptions.DefaultInstance = new Ezreal.EasyPay.WeChat.WeChatPayOptions()
             {
                 //配置默认配置
             };
-            services.AddTransient<Ezreal.EasyPay.WeChat.Api.WeChatPayClient>();
 
+
+            services.AddTransient<Ezreal.EasyPay.WeChat.Api.WeChatPayClient>();
             //此过程可以不在此处进行
-            WeChatClientFactroy.Configure().ConfigureHttpMessageHandler(() =>
-            {
-                System.Net.Http.HttpClientHandler handler = new System.Net.Http.HttpClientHandler();
-                handler.ClientCertificates.Add(new X509Certificate2(@"你的p12证书", "商户号", X509KeyStorageFlags.MachineKeySet | X509KeyStorageFlags.PersistKeySet | X509KeyStorageFlags.Exportable));
-                return handler;
-            });
+            WeChatPayCredentials.AddOrUpdateCredentials("商户号", new X509Certificate2(@"你的p12证书", "商户号", X509KeyStorageFlags.MachineKeySet | X509KeyStorageFlags.PersistKeySet | X509KeyStorageFlags.Exportable));
+            WeChatPayClientFactroy.Configure("商户号");
 
 
         }

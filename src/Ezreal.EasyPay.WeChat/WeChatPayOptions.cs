@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace Ezreal.EasyPay.WeChat
 {
-    public class WeChatOptions : IOptions
+    public class WeChatPayOptions : IOptions
     {
-        public static  WeChatOptions DefaultInstance { get; set; } = new WeChatOptions();
+        public static  WeChatPayOptions DefaultInstance { get; set; } = new WeChatPayOptions();
         /// <summary>
         /// 应用账号(公众账号ID/小程序ID/企业号CorpId)
         /// </summary>

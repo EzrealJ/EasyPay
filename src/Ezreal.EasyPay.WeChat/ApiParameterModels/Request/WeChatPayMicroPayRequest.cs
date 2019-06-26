@@ -18,7 +18,14 @@ namespace Ezreal.EasyPay.WeChat.ApiParameterModels.Request
     {
 
 
-
+        /// <summary>
+        /// 终端设备号
+        /// <para>
+        /// 终端设备号(商户自定义，如门店编号)
+        /// </para>
+        /// </summary>
+        [XmlElement("device_info")]
+        public string DeviceInfo { get; set; }
 
         /// <summary>
         /// 商品描述

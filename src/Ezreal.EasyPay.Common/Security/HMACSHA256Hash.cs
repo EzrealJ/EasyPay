@@ -11,7 +11,7 @@ namespace Ezreal.EasyPay.Common.Security
     {
         public static string HashString(string data, string key, string encoding = "UTF-8")
         {
-            using (var hmacSha256 = new HMACSHA256(Encoding.UTF8.GetBytes(key)))
+            using (HMACSHA256 hmacSha256 = new HMACSHA256(Encoding.UTF8.GetBytes(key)))
             {
                 byte[] hash = hmacSha256.ComputeHash(Encoding.GetEncoding(encoding).GetBytes(data));
                 return BitConverter.ToString(hash).Replace("-", "");
@@ -20,7 +20,7 @@ namespace Ezreal.EasyPay.Common.Security
 
         public static byte[] HashBuffer(byte[] data, byte[] key)
         {
-            using (var hmacSha256 = new HMACSHA256(key))
+            using (HMACSHA256 hmacSha256 = new HMACSHA256(key))
             {
                 return hmacSha256.ComputeHash(data);
             }

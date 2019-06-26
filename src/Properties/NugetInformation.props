@@ -4,7 +4,7 @@
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
         <Authors>Ezreal</Authors>
-        <Version>0.1.2-preview</Version>
+        <Version>0.1.5-preview</Version>
         <Description>基于WebClient.JIT的第三方支付接入库</Description>
         <Copyright>Ezreal</Copyright>
         <PackageProjectUrl>https://github.com/EzrealJ/EasyPay</PackageProjectUrl>

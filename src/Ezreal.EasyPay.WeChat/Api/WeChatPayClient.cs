@@ -21,7 +21,7 @@ namespace Ezreal.EasyPay.WeChat.Api
 
 
         public virtual IWeChatPayContract WeChatPayContract { get => _weChatPayContract ?? HttpApi.Resolve<IWeChatPayContract>(); protected set => _weChatPayContract = value; }
-        public virtual Func<WeChatOptions> GetDefaultWeChatOptions { get; set; } = () => WeChatOptions.DefaultInstance;
+        public virtual Func<WeChatPayOptions> GetDefaultWeChatOptions { get; set; } = () => WeChatPayOptions.DefaultInstance;
 
         /// <summary>
         /// 应用默认的商户配置
@@ -40,7 +40,7 @@ namespace Ezreal.EasyPay.WeChat.Api
                 throw new ArgumentNullException(nameof(weChatPayRequest));
             }
 
-            WeChatOptions defaultWeChatOptions = GetDefaultWeChatOptions();
+            WeChatPayOptions defaultWeChatOptions = GetDefaultWeChatOptions();
             weChatPayRequest.AppId = weChatPayRequest.AppId ?? defaultWeChatOptions.AppId;
             weChatPayRequest.MchId = weChatPayRequest.MchId ?? defaultWeChatOptions.MchId;
             return weChatPayRequest;
@@ -55,7 +55,7 @@ namespace Ezreal.EasyPay.WeChat.Api
         /// <returns></returns>
         protected virtual WeChatSignSettings ApplyDefaultSignSettings(WeChatSignSettings weChatSignSettings)
         {
-            WeChatOptions defaultWeChatOptions = GetDefaultWeChatOptions();
+            WeChatPayOptions defaultWeChatOptions = GetDefaultWeChatOptions();
             weChatSignSettings = weChatSignSettings ?? new WeChatSignSettings();
             weChatSignSettings.Key = weChatSignSettings.Key ?? defaultWeChatOptions.Key;
             weChatSignSettings.Secret = weChatSignSettings.Secret ?? defaultWeChatOptions.Secret;

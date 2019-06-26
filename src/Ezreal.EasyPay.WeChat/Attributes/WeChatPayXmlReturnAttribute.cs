@@ -16,11 +16,11 @@ namespace Ezreal.EasyPay.WeChat.Attributes
     {
         protected override async Task<object> GetTaskResult(ApiActionContext context)
         {
-            var response = context.ResponseMessage;
-            var xml = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+            System.Net.Http.HttpResponseMessage response = context.ResponseMessage;
+            string xml = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
 
-            var dataType = context.ApiActionDescriptor.Return.DataType.Type;
-            var result = context.HttpApiConfig.XmlFormatter.Deserialize(xml, dataType);
+            Type dataType = context.ApiActionDescriptor.Return.DataType.Type;
+            object result = context.HttpApiConfig.XmlFormatter.Deserialize(xml, dataType);
 
             IEnumerable<XElement> elements = XDocument.Parse(xml)?.Root?.Elements();
             if (elements != null && elements.Any())

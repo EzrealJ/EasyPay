@@ -19,15 +19,15 @@ namespace Ezreal.EasyPay.WeChat.Sign
         public WeChatSignSettings SignSettings { get; set; }
         public string SignWithKey(SortedDictionary<string, string> dictionary)
         {
-            var sb = new StringBuilder();
-            foreach (var iter in dictionary)
+            StringBuilder sb = new StringBuilder();
+            foreach (KeyValuePair<string, string> iter in dictionary)
             {
                 if (!string.IsNullOrEmpty(iter.Value) && iter.Key != "sign")
                 {
                     sb.Append(iter.Key).Append('=').Append(iter.Value).Append("&");
                 }
             }
-            var signContent = sb.Append("key=").Append(SignSettings.Key).ToString();
+            string signContent = sb.Append("key=").Append(SignSettings.Key).ToString();
             switch (SignSettings.SignType)
             {
                 case EnumSignType.MD5:
@@ -42,15 +42,15 @@ namespace Ezreal.EasyPay.WeChat.Sign
 
         public string SignWithSecret(SortedDictionary<string, string> dictionary,List<string> include)
         {
-            var sb = new StringBuilder();
-            foreach (var iter in dictionary)
+            StringBuilder sb = new StringBuilder();
+            foreach (KeyValuePair<string, string> iter in dictionary)
             {
                 if (!string.IsNullOrEmpty(iter.Value) && include.Contains(iter.Key))
                 {
                     sb.Append(iter.Key).Append('=').Append(iter.Value).Append("&");
                 }
             }
-            var signContent = sb.Append("secret=").Append(SignSettings.Secret).ToString();
+            string signContent = sb.Append("secret=").Append(SignSettings.Secret).ToString();
             return MD5Hash.HashToHex(signContent).ToUpper();
         }
     }
