@@ -13,6 +13,7 @@ namespace Ezreal.EasyPay.WeChat
 {
     public class WeChatPayClientFactroy
     {
+        
 #if NETSTANDARD2_0
         /// <summary>
         /// 为指定商户配置
