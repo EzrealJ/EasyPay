@@ -9,6 +9,8 @@ namespace Ezreal.EasyPay.Abstractions.Enums
    public enum EnumSignType
     {
         MD5,
-        HMACSHA256
+        HMACSHA256,
+        RSA,
+        RSA2,
     }
 }

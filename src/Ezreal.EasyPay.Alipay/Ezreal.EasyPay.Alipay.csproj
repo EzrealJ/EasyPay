@@ -11,4 +11,13 @@
     <ProjectReference Include="..\Ezreal.EasyPay.Abstractions\Ezreal.EasyPay.Abstractions.csproj" />
     <ProjectReference Include="..\Ezreal.EasyPay.Common\Ezreal.EasyPay.Common.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ApiParameterModels\Request\" />
+    <Folder Include="ApiParameterModels\Response\" />
+    <Folder Include="Api\" />
+    <Folder Include="Attributes\" />
+    <Folder Include="Domain\" />
+    <Folder Include="Parser\" />
+  </ItemGroup>
 </Project>
