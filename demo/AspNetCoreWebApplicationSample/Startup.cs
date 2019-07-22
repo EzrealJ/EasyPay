@@ -46,18 +46,24 @@ namespace AspNetCoreWebApplicationSample
                 option.IncludeXmlComments(xmlPath);
 
             });
-            WeChatPayOptions.DefaultInstance = new Ezreal.EasyPay.WeChat.WeChatPayOptions()
-            {
-                //配置默认配置
-            };
 
+            if (true)//无DI或引入DI但无多商户要求
+            {
+                WeChatPayOptions.DefaultInstance = new WeChatPayOptions()
+                {
+                    //配置默认配置
+                };
+                //此过程可以不在此处进行
+                WeChatPayCredentialsCache.DefaultInstance.AddOrUpdateCredentials("商户号", new X509Certificate2(@"你的p12证书", "商户号", X509KeyStorageFlags.MachineKeySet | X509KeyStorageFlags.PersistKeySet | X509KeyStorageFlags.Exportable));
+                WeChatPayConfigurationManager.DefaultInstance.Configure("商户号");
+            }
+
+
+            services.AddSingleton<WeChatPayCredentialsCache>(WeChatPayCredentialsCache.DefaultInstance);
+            //若将WeChatPayConfigurationManager引入DI  则必须将WeChatPayCredentialsCache引入DI 
+            services.AddSingleton<WeChatPayConfigurationManager>(WeChatPayConfigurationManager.DefaultInstance);
 
             services.AddTransient<Ezreal.EasyPay.WeChat.Api.WeChatPayClient>();
-            //此过程可以不在此处进行
-            WeChatPayCredentials.AddOrUpdateCredentials("商户号", new X509Certificate2(@"你的p12证书", "商户号", X509KeyStorageFlags.MachineKeySet | X509KeyStorageFlags.PersistKeySet | X509KeyStorageFlags.Exportable));
-            WeChatPayClientFactroy.Configure("商户号");
-
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

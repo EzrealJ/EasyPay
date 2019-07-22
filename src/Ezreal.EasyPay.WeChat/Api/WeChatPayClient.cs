@@ -19,7 +19,6 @@ namespace Ezreal.EasyPay.WeChat.Api
     {
         private IWeChatPayContract _weChatPayContract;
 
-
         public virtual IWeChatPayContract WeChatPayContract { get => _weChatPayContract ?? HttpApi.Resolve<IWeChatPayContract>(); protected set => _weChatPayContract = value; }
         public virtual Func<WeChatPayOptions> GetDefaultWeChatOptions { get; set; } = () => WeChatPayOptions.DefaultInstance;
 
@@ -145,7 +144,6 @@ namespace Ezreal.EasyPay.WeChat.Api
         }
 
         public ITask<WeChatPayRefundResponse> Refund(
-
           WeChatPayRefundRequest refundRequest,
            WeChatSignSettings weChatSignSettings = null,
           TimeSpan? timeout = null,
@@ -160,7 +158,6 @@ namespace Ezreal.EasyPay.WeChat.Api
 
 
         public ITask<WeChatPayRefundQueryResponse> RefundQuery(
-
         WeChatPayRefundQueryRequest refundQueryRequest,
          WeChatSignSettings weChatSignSettings = null,
         TimeSpan? timeout = null,

@@ -10,6 +10,12 @@ namespace Ezreal.EasyPay.WeChat
 {
     public class WeChatPayOptions : IOptions
     {
+        /// <summary>
+        /// 默认的微信支付配置选项,使用于简单无多商户的模式
+        ///<para>
+        /// 当未在请求参数中提供配置信息时,将从此实例获取配置并应用
+        /// </para>
+        /// </summary>
         public static  WeChatPayOptions DefaultInstance { get; set; } = new WeChatPayOptions();
         /// <summary>
         /// 应用账号(公众账号ID/小程序ID/企业号CorpId)
@@ -30,10 +36,5 @@ namespace Ezreal.EasyPay.WeChat
         /// API秘钥
         /// </summary>
         public string Key { get; set; }
-
-        ///// <summary>
-        ///// 日志等级
-        ///// </summary>
-        //public LogLevel LogLevel { get; set; } = LogLevel.Information;
     }
 }

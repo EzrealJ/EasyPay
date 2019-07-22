@@ -34,7 +34,7 @@ namespace AspNetCoreWebApplicationSample.Controllers
             {
 
                 WeChatPayMicroPayResponse result = await _weChatPayClient.MicroPay(microPayRequest, weChatSignSettings);
-                var a = await _weChatPayClient.Reverse(new WeChatPayReverseRequest() {
+                WeChatPayReverseResponse a = await _weChatPayClient.Reverse(new WeChatPayReverseRequest() {
                     OutTradeNo=result.OutTradeNo,
                     SubMchId=result.SubMchId,
                 });
