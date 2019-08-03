@@ -1,6 +1,7 @@
 ﻿using Ezreal.EasyPay.WeChat.Api;
 using Ezreal.EasyPay.WeChat.ApiContract;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -19,6 +20,8 @@ namespace Ezreal.EasyPay.WeChat
         /// </summary>
         public static WeChatPayConfigurationManager DefaultInstance { get; set; } = new WeChatPayConfigurationManager();
 
+        protected virtual ConcurrentDictionary<string, object> ConfigurationConcurrentDictionary { get; set; } = new ConcurrentDictionary<string, object>();
+
         public WeChatPayConfigurationManager(WeChatPayCredentialsCache weChatPayCredentialsCache = null)
         {
             _weChatPayCredentialsCache = weChatPayCredentialsCache ?? WeChatPayCredentialsCache.DefaultInstance;
@@ -27,33 +30,64 @@ namespace Ezreal.EasyPay.WeChat
         /// 为指定商户配置
         /// </summary>
         /// <param name="merchantId"></param>
+        /// <param name="options"></param>
         /// <param name="handlerFactory"></param>
+        /// <param name="cleanupInterval"></param>
+        /// <param name="KeepCookieContainer"></param>
+        /// <param name="lifeTime"></param>
         /// <returns></returns>
-        public HttpApiFactory<IWeChatPayContract> Configure(string merchantId, Func<HttpClientHandler> handlerFactory = null)
+        public virtual void Configure(string merchantId, Action<HttpApiConfig> options = null,
+            Func<HttpClientHandler> handlerFactory = null,
+           TimeSpan? cleanupInterval = null,
+           bool? KeepCookieContainer = null,
+           TimeSpan? lifeTime = null
+           )
         {
-            if (CheckConfigure(merchantId))
+            if (CheckConfiguration(merchantId))
             {
                 throw new Exception("已为此商户配置过,无需重新进行配置,若希望更新证书,请更新证书缓存");
             }
-            return HttpApi.Register<IWeChatPayContract>($"{merchantId}_{nameof(IWeChatPayContract)}").ConfigureHttpMessageHandler(() =>
+            ConfigurationConcurrentDictionary.TryAdd(merchantId, (options, handlerFactory));
+            HttpApiFactory<IWeChatPayContract> httpApiFactory = HttpApi.Register<IWeChatPayContract>($"{merchantId}_{nameof(IWeChatPayContract)}");
+            if (options != null)
+            {
+                httpApiFactory = httpApiFactory.ConfigureHttpApiConfig(options);
+            }
+            if (handlerFactory != null)
             {
 
-                HttpClientHandler handler = handlerFactory?.Invoke() ?? new HttpClientHandler();
-                X509Certificate x509 = _weChatPayCredentialsCache.GetCertificate(merchantId);
-                if (x509 != null)
-                {
-                    handler.ClientCertificates.Add(x509);
-                }
+                httpApiFactory = httpApiFactory.ConfigureHttpMessageHandler(() =>
+                 {
 
-                return handler;
-            });
-        }        
+                     HttpClientHandler handler = handlerFactory?.Invoke() ?? new HttpClientHandler();
+                     X509Certificate x509 = _weChatPayCredentialsCache.GetCertificate(merchantId);
+                     if (x509 != null)
+                     {
+                         handler.ClientCertificates.Add(x509);
+                     }
+
+                     return handler;
+                 });
+            }
+            if (cleanupInterval.HasValue)
+            {
+                httpApiFactory = httpApiFactory.SetCleanupInterval(cleanupInterval.Value);
+            }
+            if (KeepCookieContainer.HasValue)
+            {
+                httpApiFactory = httpApiFactory.SetKeepCookieContainer(KeepCookieContainer.Value);
+            }
+            if (lifeTime.HasValue)
+            {
+                httpApiFactory = httpApiFactory.SetLifetime(lifeTime.Value);
+            }
+        }
         /// <summary>
         /// 检查商户是否已经配置过
         /// </summary>
         /// <param name="merchantId"></param>
         /// <returns></returns>
-        public bool CheckConfigure(string merchantId) => HttpApi.Resolve<IWeChatPayContract>($"{merchantId}_{nameof(IWeChatPayContract)}") != null;
+        public virtual bool CheckConfiguration(string merchantId) => ConfigurationConcurrentDictionary.ContainsKey(merchantId);
 
     }
 }

@@ -17,9 +17,9 @@ namespace Ezreal.EasyPay.WeChat.Api
     /// </summary>
     public class WeChatPayClient
     {
-        private IWeChatPayContract _weChatPayContract;
 
-        public virtual IWeChatPayContract WeChatPayContract { get => _weChatPayContract ?? HttpApi.Resolve<IWeChatPayContract>(); protected set => _weChatPayContract = value; }
+
+        public virtual IWeChatPayContract WeChatPayContract { get ; protected set; }
         public virtual Func<WeChatPayOptions> GetDefaultWeChatOptions { get; set; } = () => WeChatPayOptions.DefaultInstance;
 
         /// <summary>
