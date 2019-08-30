@@ -36,19 +36,34 @@ namespace Ezreal.EasyPay.WeChat
         /// <param name="KeepCookieContainer"></param>
         /// <param name="lifeTime"></param>
         /// <returns></returns>
-        public virtual void Configure(string merchantId, Action<HttpApiConfig> options = null,
+        ///
+
+        public virtual void Configure(
+            string merchantId,
+            Action<HttpApiConfig> options = null,
             Func<HttpClientHandler> handlerFactory = null,
-           TimeSpan? cleanupInterval = null,
-           bool? KeepCookieContainer = null,
-           TimeSpan? lifeTime = null
-           )
+            TimeSpan? cleanupInterval = null,
+            bool? KeepCookieContainer = null,
+            TimeSpan? lifeTime = null)
         {
             if (CheckConfiguration(merchantId))
             {
                 throw new Exception("已为此商户配置过,无需重新进行配置,若希望更新证书,请更新证书缓存");
             }
             ConfigurationConcurrentDictionary.TryAdd(merchantId, (options, handlerFactory));
-            HttpApiFactory<IWeChatPayContract> httpApiFactory = HttpApi.Register<IWeChatPayContract>($"{merchantId}_{nameof(IWeChatPayContract)}");
+            ConfigureHttpApi<IWeChatPayContract>(merchantId, options, handlerFactory, cleanupInterval, KeepCookieContainer, lifeTime);
+            ConfigureHttpApi<IWeChatPayAuthContract>(merchantId, options, handlerFactory, cleanupInterval, KeepCookieContainer, lifeTime);
+        }
+        protected virtual void ConfigureHttpApi<TContract>(
+            string merchantId,
+            Action<HttpApiConfig> options = null,
+            Func<HttpClientHandler> handlerFactory = null,
+            TimeSpan? cleanupInterval = null,
+            bool? KeepCookieContainer = null,
+            TimeSpan? lifeTime = null) where TContract : class, IHttpApi
+        {
+
+            HttpApiFactory<TContract> httpApiFactory = HttpApi.Register<TContract>($"{merchantId}_{typeof(TContract).Name}");
             if (options != null)
             {
                 httpApiFactory = httpApiFactory.ConfigureHttpApiConfig(options);

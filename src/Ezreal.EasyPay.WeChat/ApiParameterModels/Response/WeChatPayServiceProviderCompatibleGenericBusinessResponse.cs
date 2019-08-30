@@ -11,7 +11,7 @@ namespace Ezreal.EasyPay.WeChat.ApiParameterModels.Response
     /// <summary>
     /// 微信支付服务商兼容接口的通用响应模型
     /// </summary>
-    public abstract class WeChatPayServiceProviderCompatibleGenericBusinessResponse : WeChatPayGenericBusinessResponse
+    public class WeChatPayServiceProviderCompatibleGenericBusinessResponse : WeChatPayGenericBusinessResponse
     {
         /// <summary>
         /// 子商户公众账号ID

@@ -67,7 +67,7 @@ namespace Ezreal.EasyPay.WeChat.ApiParameterModels.Response
         /// </para>
         /// </summary>
         [XmlIgnore]
-        public bool IsEffectiveResult
+        public virtual bool IsEffectiveResult
         {
             get =>
             (!string.IsNullOrWhiteSpace(this.ReturnCode))

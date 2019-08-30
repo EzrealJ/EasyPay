@@ -135,10 +135,10 @@ namespace Ezreal.EasyPay.WeChat.ApiParameterModels.Response
         /// </summary>
         [XmlIgnore]
         public bool NeedReCall => (!string.IsNullOrWhiteSpace(this.TradeState))
-            && NeedReCallStates.Contains(this.TradeState);
+            && _needReCallStates.Contains(this.TradeState);
 
 
-        private string[] NeedReCallStates = { "USERPAYING", "NOTPAY" };
+        private string[] _needReCallStates = { "USERPAYING", "NOTPAY" };
 
 
 

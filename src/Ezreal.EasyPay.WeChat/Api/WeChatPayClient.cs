@@ -19,7 +19,9 @@ namespace Ezreal.EasyPay.WeChat.Api
     {
 
 
-        public virtual IWeChatPayContract WeChatPayContract { get ; protected set; }
+        public virtual IWeChatPayContract WeChatPayContract { get; protected set; }
+
+        public virtual IWeChatPayAuthContract WeChatPayAuthContract { get; protected set; }
         public virtual Func<WeChatPayOptions> GetDefaultWeChatOptions { get; set; } = () => WeChatPayOptions.DefaultInstance;
 
         /// <summary>
@@ -66,7 +68,8 @@ namespace Ezreal.EasyPay.WeChat.Api
         /// </summary>
         /// <param name="merchantId">商户号</param>
         /// <returns></returns>
-        protected virtual IWeChatPayContract ResolveFromTargetMerchantFactory(string merchantId) => HttpApi.Resolve<IWeChatPayContract>($"{merchantId}_{nameof(IWeChatPayContract)}");
+        protected virtual TContract ResolveFromTargetMerchantFactory<TContract>(string merchantId) where TContract : class, IHttpApi => HttpApi.Resolve<TContract>($"{merchantId}_{typeof(TContract).Name}");
+
 
         public ITask<WeChatPayMicroPayResponse> MicroPay(
         WeChatPayMicroPayRequest microPayRequest,
@@ -76,10 +79,22 @@ namespace Ezreal.EasyPay.WeChat.Api
         {
             weChatSignSettings = ApplyDefaultSignSettings(weChatSignSettings);
             ApplyDefaultMerchantSettings(microPayRequest);
-            WeChatPayContract = WeChatPayContract ?? ResolveFromTargetMerchantFactory(microPayRequest.MchId);
+            WeChatPayContract = WeChatPayContract ?? ResolveFromTargetMerchantFactory<IWeChatPayContract>(microPayRequest.MchId);
             return WeChatPayContract.MicroPay(weChatSignSettings, microPayRequest, timeout, cancellationToken);
         }
 
+
+        public ITask<WeChatPayFacePayAuthResponse> FacePayAuth(
+        WeChatPayFacePayAuthRequest facePayAuthRequest,
+        WeChatSignSettings weChatSignSettings = null,
+        TimeSpan? timeout = null,
+        CancellationToken cancellationToken = default(CancellationToken))
+        {
+            weChatSignSettings = ApplyDefaultSignSettings(weChatSignSettings);
+            ApplyDefaultMerchantSettings(facePayAuthRequest);
+            WeChatPayAuthContract = WeChatPayAuthContract ?? ResolveFromTargetMerchantFactory<IWeChatPayAuthContract>(facePayAuthRequest.MchId);
+            return WeChatPayAuthContract.FacePayAuth(weChatSignSettings, facePayAuthRequest, timeout, cancellationToken);
+        }
         public ITask<WeChatPayFacePayResponse> FacePay(
         WeChatPayFacePayRequest facePayRequest,
         WeChatSignSettings weChatSignSettings = null,
@@ -88,7 +103,7 @@ namespace Ezreal.EasyPay.WeChat.Api
         {
             weChatSignSettings = ApplyDefaultSignSettings(weChatSignSettings);
             ApplyDefaultMerchantSettings(facePayRequest);
-            WeChatPayContract = WeChatPayContract ?? ResolveFromTargetMerchantFactory(facePayRequest.MchId);
+            WeChatPayContract = WeChatPayContract ?? ResolveFromTargetMerchantFactory<IWeChatPayContract>(facePayRequest.MchId);
             return WeChatPayContract.FacePay(weChatSignSettings, facePayRequest, timeout, cancellationToken);
         }
 
@@ -100,7 +115,7 @@ namespace Ezreal.EasyPay.WeChat.Api
         {
             weChatSignSettings = ApplyDefaultSignSettings(weChatSignSettings);
             ApplyDefaultMerchantSettings(orderQueryRequest);
-            WeChatPayContract = WeChatPayContract ?? ResolveFromTargetMerchantFactory(orderQueryRequest.MchId);
+            WeChatPayContract = WeChatPayContract ?? ResolveFromTargetMerchantFactory<IWeChatPayContract>(orderQueryRequest.MchId);
             return WeChatPayContract.OrderQuery(weChatSignSettings, orderQueryRequest, timeout, cancellationToken);
         }
         public ITask<WeChatPayFacePayQueryResponse> FacePayQuery(
@@ -111,7 +126,7 @@ namespace Ezreal.EasyPay.WeChat.Api
         {
             weChatSignSettings = ApplyDefaultSignSettings(weChatSignSettings);
             ApplyDefaultMerchantSettings(facePayQueryRequest);
-            WeChatPayContract = WeChatPayContract ?? ResolveFromTargetMerchantFactory(facePayQueryRequest.MchId);
+            WeChatPayContract = WeChatPayContract ?? ResolveFromTargetMerchantFactory<IWeChatPayContract>(facePayQueryRequest.MchId);
             return WeChatPayContract.FacePayQuery(weChatSignSettings, facePayQueryRequest, timeout, cancellationToken);
         }
 
@@ -125,7 +140,7 @@ namespace Ezreal.EasyPay.WeChat.Api
 
             weChatSignSettings = ApplyDefaultSignSettings(weChatSignSettings);
             ApplyDefaultMerchantSettings(facePayReverseRequest);
-            WeChatPayContract = WeChatPayContract ?? ResolveFromTargetMerchantFactory(facePayReverseRequest.MchId);
+            WeChatPayContract = WeChatPayContract ?? ResolveFromTargetMerchantFactory<IWeChatPayContract>(facePayReverseRequest.MchId);
             return WeChatPayContract.FacePayReverse(weChatSignSettings, facePayReverseRequest, timeout, cancellationToken);
         }
 
@@ -139,7 +154,7 @@ namespace Ezreal.EasyPay.WeChat.Api
 
             weChatSignSettings = ApplyDefaultSignSettings(weChatSignSettings);
             ApplyDefaultMerchantSettings(reverseRequest);
-            WeChatPayContract = WeChatPayContract ?? ResolveFromTargetMerchantFactory(reverseRequest.MchId);
+            WeChatPayContract = WeChatPayContract ?? ResolveFromTargetMerchantFactory<IWeChatPayContract>(reverseRequest.MchId);
             return WeChatPayContract.Reverse(weChatSignSettings, reverseRequest, timeout, cancellationToken);
         }
 
@@ -152,7 +167,7 @@ namespace Ezreal.EasyPay.WeChat.Api
 
             weChatSignSettings = ApplyDefaultSignSettings(weChatSignSettings);
             ApplyDefaultMerchantSettings(refundRequest);
-            WeChatPayContract = WeChatPayContract ?? ResolveFromTargetMerchantFactory(refundRequest.MchId);
+            WeChatPayContract = WeChatPayContract ?? ResolveFromTargetMerchantFactory<IWeChatPayContract>(refundRequest.MchId);
             return WeChatPayContract.Refund(weChatSignSettings, refundRequest, timeout, cancellationToken);
         }
 
@@ -165,7 +180,7 @@ namespace Ezreal.EasyPay.WeChat.Api
         {
             weChatSignSettings = ApplyDefaultSignSettings(weChatSignSettings);
             ApplyDefaultMerchantSettings(refundQueryRequest);
-            WeChatPayContract = WeChatPayContract ?? ResolveFromTargetMerchantFactory(refundQueryRequest.MchId);
+            WeChatPayContract = WeChatPayContract ?? ResolveFromTargetMerchantFactory<IWeChatPayContract>(refundQueryRequest.MchId);
             return WeChatPayContract.RefundQuery(weChatSignSettings, refundQueryRequest, timeout, cancellationToken);
         }
     }

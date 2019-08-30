@@ -15,11 +15,9 @@ using WebApiClient.DataAnnotations;
 namespace Ezreal.EasyPay.WeChat.ApiContract
 {
     [HttpHost("https://api.mch.weixin.qq.com/")]
-    [TraceFilter(OutputTarget = OutputTarget.Console)]
     [Ezreal.EasyPay.WeChat.Filter.WeChatSignFilter]
     public interface IWeChatPayContract : IHttpApi
     {
-
         [HttpPost("pay/micropay")]
         [WeChatPayXmlReturn]
         ITask<WeChatPayMicroPayResponse> MicroPay(

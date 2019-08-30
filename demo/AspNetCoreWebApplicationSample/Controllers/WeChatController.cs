@@ -21,6 +21,24 @@ namespace AspNetCoreWebApplicationSample.Controllers
             this._weChatPayClient = weChatPayClient;
         }
 
+        [HttpPost(nameof(FacePayAuth))]
+        public async Task<WeChatPayFacePayAuthResponse> FacePayAuth([FromQuery]WeChatSignSettings weChatSignSettings, [FromBody]WeChatPayFacePayAuthRequest microPayRequest)
+        {
+            try
+            {
+
+                WeChatPayFacePayAuthResponse result = await _weChatPayClient.FacePayAuth(microPayRequest, weChatSignSettings);
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+
         /// <summary>
         /// 刷卡支付
         /// </summary>
@@ -34,9 +52,10 @@ namespace AspNetCoreWebApplicationSample.Controllers
             {
 
                 WeChatPayMicroPayResponse result = await _weChatPayClient.MicroPay(microPayRequest, weChatSignSettings);
-                WeChatPayReverseResponse a = await _weChatPayClient.Reverse(new WeChatPayReverseRequest() {
-                    OutTradeNo=result.OutTradeNo,
-                    SubMchId=result.SubMchId,
+                WeChatPayReverseResponse a = await _weChatPayClient.Reverse(new WeChatPayReverseRequest()
+                {
+                    OutTradeNo = result.OutTradeNo,
+                    SubMchId = result.SubMchId,
                 });
                 return result;
             }

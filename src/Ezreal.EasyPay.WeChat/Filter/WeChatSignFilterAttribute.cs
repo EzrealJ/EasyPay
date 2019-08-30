@@ -1,4 +1,5 @@
 ﻿using Ezreal.EasyPay.Abstractions.Filter;
+using Ezreal.EasyPay.Common;
 using Ezreal.EasyPay.WeChat.Sign;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +21,9 @@ namespace Ezreal.EasyPay.WeChat.Filter
             WeChatSignSettings signSettings = context.ApiActionDescriptor.Arguments.FirstOrDefault(arg => arg is WeChatSignSettings) as WeChatSignSettings;
             string xmlstring = await context.RequestMessage.Content.ReadAsStringAsync();
             XDocument xml = XDocument.Parse(xmlstring);
+
             XElement bodyDoc = xml.Root;
+            bodyDoc.Add(new XElement("sign_type", signSettings.SignType.GetDescription()));
             SortedDictionary<string, string> parameters = new SortedDictionary<string, string>();
             foreach (XElement element in bodyDoc.Elements())
             {

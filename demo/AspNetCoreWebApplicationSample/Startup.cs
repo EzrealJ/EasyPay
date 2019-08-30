@@ -54,7 +54,7 @@ namespace AspNetCoreWebApplicationSample
                     //配置默认配置
                 };
                 //此过程可以不在此处进行
-                WeChatPayCredentialsCache.DefaultInstance.AddOrUpdateCredentials("商户号", new X509Certificate2(@"你的p12证书", "商户号", X509KeyStorageFlags.MachineKeySet | X509KeyStorageFlags.PersistKeySet | X509KeyStorageFlags.Exportable));
+                //WeChatPayCredentialsCache.DefaultInstance.AddOrUpdateCredentials("商户号", new X509Certificate2(@"你的p12证书", "商户号", X509KeyStorageFlags.MachineKeySet | X509KeyStorageFlags.PersistKeySet | X509KeyStorageFlags.Exportable));
                 WeChatPayConfigurationManager.DefaultInstance.Configure("商户号");
             }
 

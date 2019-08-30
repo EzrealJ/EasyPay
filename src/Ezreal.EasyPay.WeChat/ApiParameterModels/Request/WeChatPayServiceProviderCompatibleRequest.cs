@@ -10,7 +10,7 @@ namespace Ezreal.EasyPay.WeChat.ApiParameterModels.Request
     /// <summary>
     /// 微信支付服务商兼容接口的请求模型
     /// </summary>
-    public abstract class WeChatPayServiceProviderCompatibleRequest : WeChatPayRequest, IWeChatPayServiceProviderRequest
+    public class WeChatPayServiceProviderCompatibleRequest : WeChatPayRequest, IWeChatPayServiceProviderRequest
     {
         /// <summary>
         /// 特约商户公众账号ID
