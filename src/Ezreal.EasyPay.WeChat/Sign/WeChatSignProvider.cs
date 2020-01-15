@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Ezreal.EasyPay.WeChat.Sign
 {
-    public class WeChatSignProvider: ISignProvider
+    public class WeChatSignProvider : ISignProvider
     {
         public WeChatSignProvider(WeChatSignSettings signSettings)
         {
@@ -33,14 +33,14 @@ namespace Ezreal.EasyPay.WeChat.Sign
                 case EnumSignType.MD5:
                     return MD5Hash.HashToHex(signContent).ToUpper();
                 case EnumSignType.HMACSHA256:
-                    return HMACSHA256Hash.HashString(signContent, SignSettings.Key).ToUpper();
+                    return HMACSHA256Hash.HashToHex(signContent, SignSettings.Key).ToUpper();
                 default:
                     break;
             }
             return null;
         }
 
-        public string SignWithSecret(SortedDictionary<string, string> dictionary,List<string> include)
+        public string SignWithSecret(SortedDictionary<string, string> dictionary, List<string> include)
         {
             StringBuilder sb = new StringBuilder();
             foreach (KeyValuePair<string, string> iter in dictionary)

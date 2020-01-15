@@ -33,7 +33,7 @@ namespace Ezreal.EasyPay.WeChat.Sign
                 case EnumSignType.MD5:
                     return MD5Hash.HashToHex(signContent).ToUpper();
                 case EnumSignType.HMACSHA256:
-                    return HMACSHA256Hash.HashString(signContent, SignSettings.Key).ToUpper();
+                    return HMACSHA256Hash.HashToHex(signContent, SignSettings.Key).ToUpper();
                 default:
                     break;
             }
