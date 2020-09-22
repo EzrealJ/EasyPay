@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Xml.Serialization;
+using Ezreal.EasyPay.Abstractions.ApiParameterModels;
 using Ezreal.EasyPay.Abstractions.Attributes;
 using Ezreal.EasyPay.WeChat.ApiParameterModels.Response;
 

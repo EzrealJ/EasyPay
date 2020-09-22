@@ -33,7 +33,7 @@ namespace Ezreal.EasyPay.WeChat
         /// <param name="options"></param>
         /// <param name="handlerFactory"></param>
         /// <param name="cleanupInterval"></param>
-        /// <param name="KeepCookieContainer"></param>
+        /// <param name="keepCookieContainer"></param>
         /// <param name="lifeTime"></param>
         /// <returns></returns>
         ///
@@ -43,7 +43,7 @@ namespace Ezreal.EasyPay.WeChat
             Action<HttpApiConfig> options = null,
             Func<HttpClientHandler> handlerFactory = null,
             TimeSpan? cleanupInterval = null,
-            bool? KeepCookieContainer = null,
+            bool? keepCookieContainer = null,
             TimeSpan? lifeTime = null)
         {
             if (CheckConfiguration(merchantId))
@@ -51,15 +51,15 @@ namespace Ezreal.EasyPay.WeChat
                 throw new Exception("已为此商户配置过,无需重新进行配置,若希望更新证书,请更新证书缓存");
             }
             ConfigurationConcurrentDictionary.TryAdd(merchantId, (options, handlerFactory));
-            ConfigureHttpApi<IWeChatPayContract>(merchantId, options, handlerFactory, cleanupInterval, KeepCookieContainer, lifeTime);
-            ConfigureHttpApi<IWeChatPayAuthContract>(merchantId, options, handlerFactory, cleanupInterval, KeepCookieContainer, lifeTime);
+            ConfigureHttpApi<IWeChatPayContract>(merchantId, options, handlerFactory, cleanupInterval, keepCookieContainer, lifeTime);
+            ConfigureHttpApi<IWeChatPayAuthContract>(merchantId, options, handlerFactory, cleanupInterval, keepCookieContainer, lifeTime);
         }
         protected virtual void ConfigureHttpApi<TContract>(
             string merchantId,
             Action<HttpApiConfig> options = null,
             Func<HttpClientHandler> handlerFactory = null,
             TimeSpan? cleanupInterval = null,
-            bool? KeepCookieContainer = null,
+            bool? keepCookieContainer = null,
             TimeSpan? lifeTime = null) where TContract : class, IHttpApi
         {
 
@@ -88,9 +88,9 @@ namespace Ezreal.EasyPay.WeChat
             {
                 httpApiFactory = httpApiFactory.SetCleanupInterval(cleanupInterval.Value);
             }
-            if (KeepCookieContainer.HasValue)
+            if (keepCookieContainer.HasValue)
             {
-                httpApiFactory = httpApiFactory.SetKeepCookieContainer(KeepCookieContainer.Value);
+                httpApiFactory = httpApiFactory.SetKeepCookieContainer(keepCookieContainer.Value);
             }
             if (lifeTime.HasValue)
             {

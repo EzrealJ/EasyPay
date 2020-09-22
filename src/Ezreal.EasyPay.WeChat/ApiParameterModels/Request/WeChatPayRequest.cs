@@ -42,6 +42,6 @@ namespace Ezreal.EasyPay.WeChat.ApiParameterModels.Request
         /// <para>默认使用Guid.NewGuid().ToString("n")实现</para>
         /// </summary>
         [XmlElement("nonce_str"), MustProvide]
-        public string NonceStr { get; set; } = Guid.NewGuid().ToString("N");
+        public virtual string NonceStr { get; set; } = Guid.NewGuid().ToString("N");
     }
 }

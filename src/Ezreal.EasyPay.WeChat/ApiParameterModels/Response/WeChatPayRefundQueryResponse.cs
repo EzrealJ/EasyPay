@@ -1,7 +1,7 @@
 ﻿using Ezreal.EasyPay.WeChat.Domain;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
 using System.Xml.Serialization;
+using Ezreal.EasyPay.WeChat.Parser;
 
 namespace Ezreal.EasyPay.WeChat.ApiParameterModels.Response
 {
@@ -25,7 +25,7 @@ namespace Ezreal.EasyPay.WeChat.ApiParameterModels.Response
         public string TransactionId { get; set; }
 
         /// <summary>
-        /// 商户订单号	
+        /// 商户订单号
         /// </summary>
         [XmlElement("out_trade_no")]
         public string OutTradeNo { get; set; }
@@ -49,7 +49,7 @@ namespace Ezreal.EasyPay.WeChat.ApiParameterModels.Response
         public string FeeType { get; set; }
 
         /// <summary>
-        /// 现金支付金额	
+        /// 现金支付金额
         /// </summary>
         [XmlElement("cash_fee")]
         public int CashFee { get; set; }
@@ -66,9 +66,9 @@ namespace Ezreal.EasyPay.WeChat.ApiParameterModels.Response
         [XmlIgnore]
         public List<RefundInfo> RefundInfos { get; set; }
 
-        void IWeChatPayXmlReturnListPropertParser.ParseListPropert(IEnumerable<System.Xml.Linq.XElement> elements)
+        void IWeChatPayXmlReturnListPropertParser.ParseListProperty(IEnumerable<System.Xml.Linq.XElement> elements)
         {
-            var parser = new Parser.WeChatPayListPropertyParser();
+            WeChatPayListPropertyParser parser = new Parser.WeChatPayListPropertyParser();
             RefundInfos = parser.Parse<RefundInfo, CouponRefundInfo>(elements);
         }
     }

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
 using System.Xml.Serialization;
+using Ezreal.EasyPay.Abstractions.ApiParameterModels;
+using Ezreal.EasyPay.WeChat.Parser;
 
 namespace Ezreal.EasyPay.WeChat.ApiParameterModels.Response
 {
@@ -12,7 +14,7 @@ namespace Ezreal.EasyPay.WeChat.ApiParameterModels.Response
     [XmlRoot("xml")]
     public class WeChatPayOrderQueryResponse : WeChatPayServiceProviderCompatibleGenericBusinessResponse,IWeChatPayXmlReturnListPropertParser,ISupportCompleted
     {
-        
+
         /// <summary>
         /// 设备号
         /// </summary>
@@ -20,7 +22,7 @@ namespace Ezreal.EasyPay.WeChat.ApiParameterModels.Response
         public string DeviceInfo { get; set; }
 
         /// <summary>
-        /// 用户标识	
+        /// 用户标识
         /// </summary>
         [XmlElement("openid")]
         public string OpenId { get; set; }
@@ -32,7 +34,7 @@ namespace Ezreal.EasyPay.WeChat.ApiParameterModels.Response
         public string IsSubscribe { get; set; }
 
         /// <summary>
-        /// 用户子标识	
+        /// 用户子标识
         /// </summary>
         [XmlElement("sub_openid")]
         public string SubOpenId { get; set; }
@@ -44,7 +46,7 @@ namespace Ezreal.EasyPay.WeChat.ApiParameterModels.Response
         public string SubIsSubscribe { get; set; }
 
         /// <summary>
-        /// 交易类型	
+        /// 交易类型
         /// </summary>
         [XmlElement("trade_type")]
         public string TradeType { get; set; }
@@ -86,7 +88,7 @@ namespace Ezreal.EasyPay.WeChat.ApiParameterModels.Response
         public int SettlementTotalFee { get; set; }
 
         /// <summary>
-        /// 现金支付金额	
+        /// 现金支付金额
         /// </summary>
         [XmlElement("cash_fee")]
         public int CashFee { get; set; }
@@ -98,13 +100,13 @@ namespace Ezreal.EasyPay.WeChat.ApiParameterModels.Response
         public string CashFeeType { get; set; }
 
         /// <summary>
-        /// 代金券金额	
+        /// 代金券金额
         /// </summary>
         [XmlElement("coupon_fee")]
         public int CouponFee { get; set; }
 
         /// <summary>
-        /// 代金券使用数量	
+        /// 代金券使用数量
         /// </summary>
         [XmlElement("coupon_count")]
         public int CouponCount { get; set; }
@@ -116,25 +118,25 @@ namespace Ezreal.EasyPay.WeChat.ApiParameterModels.Response
         public List<CouponInfo> CouponInfos { get; set; }
 
         /// <summary>
-        /// 微信支付订单号	
+        /// 微信支付订单号
         /// </summary>
         [XmlElement("transaction_id")]
         public string TransactionId { get; set; }
 
         /// <summary>
-        /// 商户订单号	
+        /// 商户订单号
         /// </summary>
         [XmlElement("out_trade_no")]
         public string OutTradeNo { get; set; }
 
         /// <summary>
-        /// 附加数据	
+        /// 附加数据
         /// </summary>
         [XmlElement("attach")]
         public string Attach { get; set; }
 
         /// <summary>
-        /// 支付完成时间	
+        /// 支付完成时间
         /// </summary>
         [XmlElement("time_end")]
         public string TimeEnd { get; set; }
@@ -145,9 +147,9 @@ namespace Ezreal.EasyPay.WeChat.ApiParameterModels.Response
         [XmlElement("trade_state_desc")]
         public string TradeStateDesc { get; set; }
 
-        void IWeChatPayXmlReturnListPropertParser.ParseListPropert(IEnumerable<XElement> elements)
+        void IWeChatPayXmlReturnListPropertParser.ParseListProperty(IEnumerable<XElement> elements)
         {
-            var parser = new Parser.WeChatPayListPropertyParser();
+            WeChatPayListPropertyParser parser = new Parser.WeChatPayListPropertyParser();
             CouponInfos = parser.Parse<CouponInfo, object>(elements);
         }
 
@@ -157,9 +159,9 @@ namespace Ezreal.EasyPay.WeChat.ApiParameterModels.Response
         /// </summary>
         [XmlIgnore]
         public bool NeedReCall => (!string.IsNullOrWhiteSpace(this.TradeState))
-            && NeedReCallStates.Contains(this.TradeState);
+            && _needReCallStates.Contains(this.TradeState);
 
 
-        private string[] NeedReCallStates = { "USERPAYING", "NOTPAY" };
+        private string[] _needReCallStates = { "USERPAYING", "NOTPAY" };
     }
 }

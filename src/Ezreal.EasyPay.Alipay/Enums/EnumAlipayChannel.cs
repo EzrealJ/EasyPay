@@ -16,7 +16,7 @@ namespace Ezreal.EasyPay.Alipay.Enums
         /// <summary>
         /// 通过调用微信App的内置的JSAPI发起支付
         /// </summary>
-        JSAPI = 0b11,
+        JsApi = 0b11,
         /// <summary>
         /// 用户打开扫一扫,扫商户的二维码完成支付
         /// </summary>
@@ -24,9 +24,9 @@ namespace Ezreal.EasyPay.Alipay.Enums
         /// <summary>
         /// 商户APP中集成微信支付SDK，用户点击后拉起微信支付
         /// </summary>
-        APP = 0b1111,
+        App = 0b1111,
         /// <summary>
-        /// 用户在微信意外的收集浏览器请求微信支付的场景唤醒微信支付 
+        /// 用户在微信意外的收集浏览器请求微信支付的场景唤醒微信支付
         /// </summary>
         H5 = 0b11111,
         /// <summary>

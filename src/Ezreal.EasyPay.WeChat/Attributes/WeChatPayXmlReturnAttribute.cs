@@ -54,7 +54,7 @@ namespace Ezreal.EasyPay.WeChat.Attributes
 
                 if (result is IWeChatPayXmlReturnListPropertParser weChatPayXmlReturnListPropertParser)
                 {
-                    weChatPayXmlReturnListPropertParser.ParseListPropert(elements);
+                    weChatPayXmlReturnListPropertParser.ParseListProperty(elements);
                 }
             }
             return result;

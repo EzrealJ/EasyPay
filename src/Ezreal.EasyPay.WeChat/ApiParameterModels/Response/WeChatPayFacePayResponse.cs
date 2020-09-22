@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
+using Ezreal.EasyPay.Abstractions.ApiParameterModels;
 
 namespace Ezreal.EasyPay.WeChat.ApiParameterModels.Response
 {

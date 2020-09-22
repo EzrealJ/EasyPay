@@ -8,4 +8,8 @@
     <ProjectReference Include="..\Ezreal.EasyPay.Common\Ezreal.EasyPay.Common.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="ApiParameterModels\Request\Pay" />
+  </ItemGroup>
+
 </Project>

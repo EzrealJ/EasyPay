@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Xml.Serialization;
+using Ezreal.EasyPay.Abstractions.ApiParameterModels;
 
 namespace Ezreal.EasyPay.WeChat.ApiParameterModels.Response
 {
@@ -23,11 +24,8 @@ namespace Ezreal.EasyPay.WeChat.ApiParameterModels.Response
         public int ExpiresIn { get; set; }
 
 
-        public override bool IsEffectiveResult
-        {
-            get =>
+        public override bool IsEffectiveResult =>
             (!string.IsNullOrWhiteSpace(this.ReturnCode))
             && this.ReturnCode.ToUpper() == "SUCCESS";
-        }
     }
 }

@@ -14,6 +14,8 @@
     <Folder Include="Api\" />
     <Folder Include="Attributes\" />
     <Folder Include="Domain\" />
+    <Folder Include="Filter" />
     <Folder Include="Parser\" />
+    <Folder Include="Sign" />
   </ItemGroup>
 </Project>

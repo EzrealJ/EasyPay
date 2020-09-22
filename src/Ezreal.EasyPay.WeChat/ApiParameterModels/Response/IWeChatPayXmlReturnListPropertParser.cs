@@ -12,6 +12,6 @@ namespace Ezreal.EasyPay.WeChat.ApiParameterModels.Response
     /// </summary>
     interface IWeChatPayXmlReturnListPropertParser
     {
-        void ParseListPropert(IEnumerable<XElement> elements);
+        void ParseListProperty(IEnumerable<XElement> elements);
     }
 }
