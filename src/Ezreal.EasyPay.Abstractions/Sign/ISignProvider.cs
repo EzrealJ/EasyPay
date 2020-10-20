@@ -8,5 +8,5 @@ namespace Ezreal.EasyPay.Abstractions.Sign
 {
     public interface ISignProvider
     {
-    }
+    } 
 }
