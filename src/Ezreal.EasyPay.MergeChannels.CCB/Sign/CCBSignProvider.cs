@@ -14,6 +14,7 @@ namespace Ezreal.EasyPay.MergeChannels.CCB.Sign
         }
 
         public CCBSignSettings SignSettings { get; }
+        public  string SignString { get; private set; }
 
         public string SignWithLast30BitsOfPublicKey(SortedDictionary<string, string> dictionary)
         {
@@ -30,7 +31,10 @@ namespace Ezreal.EasyPay.MergeChannels.CCB.Sign
                 }
                 stringBuilder.Append(item.Key + "=" + item.Value);
             }
-            return Common.Security.MD5Hash.HashToHex(stringBuilder.ToString());
+
+            stringBuilder?.Append("&PUB=" + SignSettings.Last30BitsOfPublicKey);
+            SignString= stringBuilder?.ToString();
+            return Common.Security.MD5Hash.HashToHex(SignString);
         }
     }
 }

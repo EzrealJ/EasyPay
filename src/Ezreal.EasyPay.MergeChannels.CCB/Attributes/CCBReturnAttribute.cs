@@ -4,6 +4,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using Ezreal.EasyPay.MergeChannels.CCB.ApiParameterModels.Response;
 using WebApiClient.Attributes;
 using WebApiClient.Contexts;
 
@@ -11,9 +12,9 @@ namespace Ezreal.EasyPay.MergeChannels.CCB.Attributes
 {
     public class CCBReturnAttribute : ApiReturnAttribute
     {
-
         public static string JsonMediaType => "application/json";
         public static string HtmlMediaType => "text/html";
+
         /// <summary>
         /// 配置请求头的accept
         /// </summary>
@@ -21,7 +22,7 @@ namespace Ezreal.EasyPay.MergeChannels.CCB.Attributes
         /// <returns></returns>
         protected override void ConfigureAccept(HttpHeaderValueCollection<MediaTypeWithQualityHeaderValue> accept)
         {
-            accept.Add(new MediaTypeWithQualityHeaderValue(JsonMediaType));
+            // accept.Add(new MediaTypeWithQualityHeaderValue(JsonMediaType));
             accept.Add(new MediaTypeWithQualityHeaderValue(HtmlMediaType));
         }
 
@@ -33,10 +34,25 @@ namespace Ezreal.EasyPay.MergeChannels.CCB.Attributes
         protected override async Task<object> GetTaskResult(ApiActionContext context)
         {
             HttpResponseMessage response = context.ResponseMessage;
-            string result = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-
+            string resultString = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+            resultString = resultString?.TrimStart()?.TrimEnd();
+            object result = null;
             Type dataType = context.ApiActionDescriptor.Return.DataType.Type;
-            object result = context.HttpApiConfig.JsonFormatter.Deserialize(result, dataType);
+            if (resultString.StartsWith("{"))
+            {
+                result = context.HttpApiConfig.JsonFormatter.Deserialize(resultString, dataType);
+            }
+
+            if (typeof(CCBPayResponse).IsAssignableFrom(dataType))
+            {
+                if (result == null)
+                {
+                    result = Activator.CreateInstance(dataType);
+                }
+                (result as CCBPayResponse).Raw = resultString;
+
+            }
+
             return result;
         }
     }

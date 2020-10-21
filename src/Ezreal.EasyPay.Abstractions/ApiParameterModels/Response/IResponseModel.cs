@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ezreal.EasyPay.Abstractions.ApiParameterModels.Response
 {
-    public interface IResponseModel
+    public interface IResponseModel:IModel
     {
     }
 }

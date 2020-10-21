@@ -6,6 +6,7 @@ using Ezreal.EasyPay.MergeChannels.CCB;
 using Ezreal.EasyPay.MergeChannels.CCB.Api;
 using Ezreal.EasyPay.MergeChannels.CCB.ApiContract;
 using Ezreal.EasyPay.MergeChannels.CCB.ApiParameterModels.Request;
+using Ezreal.EasyPay.MergeChannels.CCB.ApiParameterModels.Response;
 using Ezreal.EasyPay.MergeChannels.CCB.Enums;
 using WebApiClient;
 
@@ -32,7 +33,7 @@ namespace ConsoleApp
                 OrderIdSuffix = DateTime.Now.ToString("yyyyMMddHHmmssf"),
                 ReturnType = EnumReturnType.Json
             };
-            System.Net.Http.HttpResponseMessage result = await ccbPayClient.PrePay(prePayRequest);
+            CCBPrePayResponse result = await ccbPayClient.PrePay(prePayRequest);
             Console.ReadKey();
         }
     }

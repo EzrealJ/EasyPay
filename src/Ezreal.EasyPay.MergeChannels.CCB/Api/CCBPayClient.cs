@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading;
 using Ezreal.EasyPay.MergeChannels.CCB.ApiContract;
 using Ezreal.EasyPay.MergeChannels.CCB.ApiParameterModels.Request;
+using Ezreal.EasyPay.MergeChannels.CCB.ApiParameterModels.Response;
 using Ezreal.EasyPay.MergeChannels.CCB.Sign;
 using WebApiClient;
 
@@ -60,7 +61,7 @@ namespace Ezreal.EasyPay.MergeChannels.CCB.Api
         /// <returns></returns>
         protected virtual TContract ResolveFromDefaultFactory<TContract>() where TContract : class, IHttpApi => HttpApi.Resolve<TContract>();
 
-        public ITask<HttpResponseMessage> PrePay(CCBPrePayRequest prePayRequest, CCBSignSettings signSettings = null,
+        public ITask<CCBPrePayResponse> PrePay(CCBPrePayRequest prePayRequest, CCBSignSettings signSettings = null,
   TimeSpan? timeout = null,
  CancellationToken cancellationToken = default)
         {

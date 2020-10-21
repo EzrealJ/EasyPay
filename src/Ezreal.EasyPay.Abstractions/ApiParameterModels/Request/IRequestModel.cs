@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ezreal.EasyPay.Abstractions.ApiParameterModels.Request
 {
-   public interface IRequestModel
+   public interface IRequestModel:IModel
     {
     }
 }
