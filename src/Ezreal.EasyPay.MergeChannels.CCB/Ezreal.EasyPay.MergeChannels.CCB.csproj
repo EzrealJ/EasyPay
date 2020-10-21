@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\Properties\NugetInformation.props" />
+  <Import Project="..\Properties\AssemblyDocument.props" />
+
+  <ItemGroup>
+    <ProjectReference Include="..\Ezreal.EasyPay.Abstractions\Ezreal.EasyPay.Abstractions.csproj" />
+    <ProjectReference Include="..\Ezreal.EasyPay.Common\Ezreal.EasyPay.Common.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ApiParameterModels\Response\" />
+  </ItemGroup>
+
+</Project>

@@ -1,4 +1,5 @@
-﻿using Ezreal.EasyPay.Abstractions.Attributes;
+﻿using Ezreal.EasyPay.Abstractions.ApiParameterModels.Request;
+using Ezreal.EasyPay.Abstractions.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,7 @@ namespace Ezreal.EasyPay.WeChat.ApiParameterModels.Request
     /// 微信支付请求模型
     /// </summary>
     [XmlRoot("xml")]
-    public abstract class WeChatPayRequest: Abstractions.ApiParameterModels.Request.IRequestModel
+    public abstract class WeChatPayRequest: IRequestModel
     {
         /// <summary>
         /// 公众账号ID

@@ -85,7 +85,7 @@ namespace Ezreal.EasyPay.WeChat.ApiParameterModels.Request
         /// <para>ISO 4217 标准的三位字母,默认CNY</para>
         /// </summary>
         [XmlElement("fee_type")]
-        public string FeeType { get; set; }
+        public string FeeType { get; set; } = "CNY";
 
         /// <summary>
         /// 终端IP

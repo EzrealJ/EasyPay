@@ -111,7 +111,7 @@ namespace Ezreal.EasyPay.WeChat.Api
         WeChatPayOrderQueryRequest orderQueryRequest,
         WeChatSignSettings weChatSignSettings = null,
         TimeSpan? timeout = null,
-        CancellationToken cancellationToken = default(CancellationToken))
+        CancellationToken cancellationToken = default)
         {
             weChatSignSettings = ApplyDefaultSignSettings(weChatSignSettings);
             ApplyDefaultMerchantSettings(orderQueryRequest);

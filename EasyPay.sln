@@ -21,6 +21,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp", "demo\ConsoleA
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ezreal.EasyPay.Alipay", "src\Ezreal.EasyPay.Alipay\Ezreal.EasyPay.Alipay.csproj", "{DC50755F-A8B5-44C2-A3AC-A8368BAE7D31}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ezreal.EasyPay.MergeChannels.CCB", "src\Ezreal.EasyPay.MergeChannels.CCB\Ezreal.EasyPay.MergeChannels.CCB.csproj", "{A14B87C3-EC1C-4023-9DA3-32532BA4D94E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{E0607B65-5991-49F9-80AE-A9FC71525885}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +55,10 @@ Global
 		{DC50755F-A8B5-44C2-A3AC-A8368BAE7D31}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DC50755F-A8B5-44C2-A3AC-A8368BAE7D31}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DC50755F-A8B5-44C2-A3AC-A8368BAE7D31}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A14B87C3-EC1C-4023-9DA3-32532BA4D94E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A14B87C3-EC1C-4023-9DA3-32532BA4D94E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A14B87C3-EC1C-4023-9DA3-32532BA4D94E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A14B87C3-EC1C-4023-9DA3-32532BA4D94E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -62,6 +70,7 @@ Global
 		{08A1376A-79F9-4C35-A187-693E7D8F22BB} = {D0E8B847-F5FA-432D-A7B6-150AD2003F3F}
 		{3D2D9B52-7E04-4D3D-A5B0-1537AEBC7FFE} = {D0E8B847-F5FA-432D-A7B6-150AD2003F3F}
 		{DC50755F-A8B5-44C2-A3AC-A8368BAE7D31} = {74D580D2-AA27-491B-949E-8E27675963C9}
+		{A14B87C3-EC1C-4023-9DA3-32532BA4D94E} = {74D580D2-AA27-491B-949E-8E27675963C9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {84003617-7667-4FBC-A922-C7003AF6CB4B}
