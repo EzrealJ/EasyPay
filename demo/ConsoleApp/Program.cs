@@ -34,6 +34,7 @@ namespace ConsoleApp
                 ReturnType = EnumReturnType.Json
             };
             CCBPrePayResponse result = await ccbPayClient.PrePay(prePayRequest);
+            string payurl = result.PayUrl;
             Console.ReadKey();
         }
     }

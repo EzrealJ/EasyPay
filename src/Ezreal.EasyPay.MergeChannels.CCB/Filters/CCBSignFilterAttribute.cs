@@ -37,7 +37,9 @@ namespace Ezreal.EasyPay.MergeChannels.CCB.Filters
 
                 CCBSignProvider ccbSignProvider = new CCBSignProvider(signSettings);
                 string sign = ccbSignProvider.SignWithLast30BitsOfPublicKey(sortedDictionary);
-
+                string signString = ccbSignProvider.SignString;
+                Uri uri = new Uri(context.RequestMessage.RequestUri.AbsoluteUri + "&MAC=" + sign);
+                context.RequestMessage.RequestUri = uri;
             }
         }
     }

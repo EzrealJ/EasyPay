@@ -31,7 +31,6 @@ namespace Ezreal.EasyPay.MergeChannels.CCB.Sign
                 }
                 stringBuilder.Append(item.Key + "=" + item.Value);
             }
-
             stringBuilder?.Append("&PUB=" + SignSettings.Last30BitsOfPublicKey);
             SignString= stringBuilder?.ToString();
             return Common.Security.MD5Hash.HashToHex(SignString);

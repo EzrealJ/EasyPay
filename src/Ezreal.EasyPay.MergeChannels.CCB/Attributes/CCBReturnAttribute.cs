@@ -22,7 +22,6 @@ namespace Ezreal.EasyPay.MergeChannels.CCB.Attributes
         /// <returns></returns>
         protected override void ConfigureAccept(HttpHeaderValueCollection<MediaTypeWithQualityHeaderValue> accept)
         {
-            // accept.Add(new MediaTypeWithQualityHeaderValue(JsonMediaType));
             accept.Add(new MediaTypeWithQualityHeaderValue(HtmlMediaType));
         }
 
