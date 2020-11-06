@@ -99,49 +99,8 @@ namespace Ezreal.EasyPay.MergeChannels.CCB.ApiParameterModels.Request
         [SignOrder(10)]
         public DateTime? Timeout { get; set; }
 
-        // /// <summary>
-        // /// 采用标准MD5算法，由商户实现
-        // /// </summary>
-        // [AliasAs("MAC")]
-        // public string Mac => CalculateMac();
-
         protected static PropertyInfo[] PropertyInfos = typeof(CCBPrePayRequest).GetProperties();
-        // protected virtual string CalculateMac()
-        // {
-        //     SortedDictionary<int, PropertyInfo> signPropertyInfosSort = new SortedDictionary<int, PropertyInfo>();
-        //     foreach (PropertyInfo propertyInfo in PropertyInfos)
-        //     {
-        //         SignOrderAttribute signOrderAttribute = propertyInfo.GetCustomAttribute<SignOrderAttribute>();
-        //         if (signOrderAttribute == null || signOrderAttribute.Order < 0)
-        //         {
-        //             continue;
-        //         }
-        //         signPropertyInfosSort.Add(signOrderAttribute.Order, propertyInfo);
-        //     }
-        //     StringBuilder stringBuilder = null;
-        //     foreach (KeyValuePair<int, PropertyInfo> item in signPropertyInfosSort)
-        //     {
-        //         if (stringBuilder == null)
-        //         {
-        //             stringBuilder = new StringBuilder();
-        //         }
-        //         else
-        //         {
-        //             stringBuilder.Append("&");
-        //         }
-        //         string parameterName = item.Value.GetCustomAttribute<AliasAsAttribute>()?.Name;
-        //         object value  = item.Value.GetValue(this);
-        //         if (item.Value.PropertyType.IsEnum)
-        //         {
-        //             value = (int)value;
-        //         }
-        //         stringBuilder.Append(parameterName + "=" + value ?.ToString());
-        //     }
-        //
-        //     string s = stringBuilder.ToString();
-        //     return Common.Security.MD5Hash.HashToHex(s)? .ToLower();
-        //
-        // }
+
 
         public int Compare(string x, string y)
         {
