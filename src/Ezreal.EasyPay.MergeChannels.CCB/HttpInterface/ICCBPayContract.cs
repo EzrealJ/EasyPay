@@ -12,7 +12,7 @@ using Newtonsoft.Json;
 using WebApiClient;
 using WebApiClient.Attributes;
 
-namespace Ezreal.EasyPay.MergeChannels.CCB.ApiContract
+namespace Ezreal.EasyPay.MergeChannels.CCB.HttpInterface
 {
     [CCBSignFilter]
     [TraceFilter(OutputTarget = OutputTarget.Console)]

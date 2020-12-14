@@ -75,7 +75,7 @@ namespace Ezreal.EasyPay.WeChat.Api
         WeChatPayMicroPayRequest microPayRequest,
         WeChatSignSettings weChatSignSettings = null,
         TimeSpan? timeout = null,
-        CancellationToken cancellationToken = default(CancellationToken))
+        CancellationToken cancellationToken = default)
         {
             weChatSignSettings = ApplyDefaultSignSettings(weChatSignSettings);
             ApplyDefaultMerchantSettings(microPayRequest);
@@ -88,7 +88,7 @@ namespace Ezreal.EasyPay.WeChat.Api
         WeChatPayFacePayAuthRequest facePayAuthRequest,
         WeChatSignSettings weChatSignSettings = null,
         TimeSpan? timeout = null,
-        CancellationToken cancellationToken = default(CancellationToken))
+        CancellationToken cancellationToken = default)
         {
             weChatSignSettings = ApplyDefaultSignSettings(weChatSignSettings);
             ApplyDefaultMerchantSettings(facePayAuthRequest);
@@ -99,7 +99,7 @@ namespace Ezreal.EasyPay.WeChat.Api
         WeChatPayFacePayRequest facePayRequest,
         WeChatSignSettings weChatSignSettings = null,
         TimeSpan? timeout = null,
-        CancellationToken cancellationToken = default(CancellationToken))
+        CancellationToken cancellationToken = default)
         {
             weChatSignSettings = ApplyDefaultSignSettings(weChatSignSettings);
             ApplyDefaultMerchantSettings(facePayRequest);
@@ -122,7 +122,7 @@ namespace Ezreal.EasyPay.WeChat.Api
         WeChatPayFacePayQueryRequest facePayQueryRequest,
         WeChatSignSettings weChatSignSettings = null,
         TimeSpan? timeout = null,
-        CancellationToken cancellationToken = default(CancellationToken))
+        CancellationToken cancellationToken = default)
         {
             weChatSignSettings = ApplyDefaultSignSettings(weChatSignSettings);
             ApplyDefaultMerchantSettings(facePayQueryRequest);
@@ -135,7 +135,7 @@ namespace Ezreal.EasyPay.WeChat.Api
         WeChatPayFacePayReverseRequest facePayReverseRequest,
         WeChatSignSettings weChatSignSettings = null,
         TimeSpan? timeout = null,
-        CancellationToken cancellationToken = default(CancellationToken))
+        CancellationToken cancellationToken = default)
         {
 
             weChatSignSettings = ApplyDefaultSignSettings(weChatSignSettings);
@@ -149,7 +149,7 @@ namespace Ezreal.EasyPay.WeChat.Api
         WeChatPayReverseRequest reverseRequest,
         WeChatSignSettings weChatSignSettings = null,
         TimeSpan? timeout = null,
-        CancellationToken cancellationToken = default(CancellationToken))
+        CancellationToken cancellationToken = default)
         {
 
             weChatSignSettings = ApplyDefaultSignSettings(weChatSignSettings);
@@ -162,7 +162,7 @@ namespace Ezreal.EasyPay.WeChat.Api
           WeChatPayRefundRequest refundRequest,
            WeChatSignSettings weChatSignSettings = null,
           TimeSpan? timeout = null,
-          CancellationToken cancellationToken = default(CancellationToken))
+          CancellationToken cancellationToken = default)
         {
 
             weChatSignSettings = ApplyDefaultSignSettings(weChatSignSettings);
@@ -176,7 +176,7 @@ namespace Ezreal.EasyPay.WeChat.Api
         WeChatPayRefundQueryRequest refundQueryRequest,
          WeChatSignSettings weChatSignSettings = null,
         TimeSpan? timeout = null,
-        CancellationToken cancellationToken = default(CancellationToken))
+        CancellationToken cancellationToken = default)
         {
             weChatSignSettings = ApplyDefaultSignSettings(weChatSignSettings);
             ApplyDefaultMerchantSettings(refundQueryRequest);

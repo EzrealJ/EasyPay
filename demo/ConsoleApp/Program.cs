@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Ezreal.EasyPay.Common.Security;
 using Ezreal.EasyPay.MergeChannels.CCB;
-using Ezreal.EasyPay.MergeChannels.CCB.Api;
-using Ezreal.EasyPay.MergeChannels.CCB.ApiContract;
 using Ezreal.EasyPay.MergeChannels.CCB.ApiParameterModels.Request;
 using Ezreal.EasyPay.MergeChannels.CCB.ApiParameterModels.Response;
 using Ezreal.EasyPay.MergeChannels.CCB.Enums;
+using Ezreal.EasyPay.MergeChannels.CCB.HttpInterface;
+using Ezreal.EasyPay.MergeChannels.CCB.Sign;
 using WebApiClient;
 
 namespace ConsoleApp
@@ -17,24 +14,22 @@ namespace ConsoleApp
         static async System.Threading.Tasks.Task Main(string[] args)
         {
             HttpApi.Register<ICCBPayContract>();
-            CCBPayClient ccbPayClient = new CCBPayClient();
-            ccbPayClient.GetDefaultCCBOptions = () =>
-            {
-                CCBPayOptions options = new CCBPayOptions();
-                options.MerchantId = "105584073990033";
-                options.PosId = "100000415";
-                options.BranchId = "442000000";
-                options.Last30BitsOfPublicKey = "bd0f9a0658b5640c37378787020111";
-                return options;
-            };
+            ICCBPayContract ccbPayClient = HttpApi.Resolve<ICCBPayContract>();
+
+            CCBPayOptions options = new CCBPayOptions();
+
+
             CCBPrePayRequest prePayRequest = new CCBPrePayRequest()
             {
-                Amount = 0.01m,
-                OrderIdSuffix = DateTime.Now.ToString("yyyyMMddHHmmssf"),
-                ReturnType = EnumReturnType.Json
+                MERCHANTID = options.MerchantId,
+                POSID = options.PosId,
+                BRANCHID = options.BranchId,
+                PAYMENT = 0.01m,
+                ORDERID = DateTime.Now.ToString("yyyyMMddHHmmssf"),
+                RETURNTYPE = EnumReturnType.JsonWithQRCodeOfMergeChannelUrl
             };
-            CCBPrePayResponse result = await ccbPayClient.PrePay(prePayRequest);
-            string payurl = result.PayUrl;
+            CCBPrePayResponse result = await ccbPayClient.PrePay(new CCBSignSettings() { Last30BitsOfPublicKey = options.Last30OfPublicKey }, prePayRequest);
+            string payurl = result.PAYURL;
             Console.ReadKey();
         }
     }

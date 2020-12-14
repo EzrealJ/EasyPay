@@ -56,7 +56,7 @@ namespace Ezreal.EasyPay.MergeChannels.CCB.ApiParameterModels.Notify
                     throw new MemberAccessException($"{nameof(value)} not be null");
                 }
                 string orderIdPrefix = value.Substring(0, 15);
-                if (orderIdPrefix != MerchantId)
+                if (orderIdPrefix != MERCHANTID)
                 {
                     throw new MemberAccessException($"{ nameof(value) } prefix must be MerchantId");
                 }
