@@ -8,8 +8,24 @@ using Ezreal.EasyPay.MergeChannels.CCB.Enums;
 
 namespace Ezreal.EasyPay.MergeChannels.CCB.ApiParameterModels.Request
 {
-    public class CCBPrePayRequest : CCBPayRequest,IParameterNameComparer
+    public class CCBPrePayRequest : ICCBPayRequest,IParameterNameComparer
     {
+        /// <summary>
+        /// 商户代码
+        /// </summary>
+        [SignOrder(0)]
+        public string MERCHANTID { get; set; }
+        /// <summary>
+        /// 柜台代码
+        /// </summary>
+        [SignOrder(1)]
+        public string POSID { get; set; }
+
+        /// <summary>
+        /// 分行代码
+        /// </summary>
+        [SignOrder(2)]
+        public string BRANCHID { get; set; }
 
 
         [SignOrder(6)]
