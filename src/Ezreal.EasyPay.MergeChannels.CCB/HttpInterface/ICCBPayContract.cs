@@ -14,13 +14,25 @@ using WebApiClient.Attributes;
 
 namespace Ezreal.EasyPay.MergeChannels.CCB.HttpInterface
 {
-    [CCBSignFilter]
+   
     [TraceFilter(OutputTarget = OutputTarget.Console)]
     [HttpHost("https://ibsbjstar.ccb.com.cn/CCBIS/ccbMain?CCB_IBSVersion=V6")]
     public interface ICCBPayContract : IHttpApi
     {
+        [CCBSignFilter]
         [CCBReturn]
         ITask<CCBPrePayResponse> PrePay(CCBSignSettings signSettings, [PathQuery] CCBPrePayRequest prePayRequest,
+        [Timeout] TimeSpan? timeout = null,
+        CancellationToken cancellationToken = default);
+        /// <summary>
+        /// 换取到的可在微信/支付宝内重定向拉起支付的Url
+        /// </summary>
+        /// <param name="url"></param>
+        /// <param name="timeout"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        [JsonReturn]
+        ITask<CCBGetMergeChannelRedirectResponse> GetMergeChannelRedirectUrl([Uri] string url,
         [Timeout] TimeSpan? timeout = null,
         CancellationToken cancellationToken = default);
     }

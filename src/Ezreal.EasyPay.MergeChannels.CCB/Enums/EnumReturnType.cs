@@ -8,6 +8,7 @@ namespace Ezreal.EasyPay.MergeChannels.CCB.Enums
     {
         /// <summary>
         ///  0或空：返回页面二维码
+        ///  <para>返回的是html 不可通过success判断</para>
         /// </summary>
         Default = 0,
         /// <summary>
@@ -16,13 +17,19 @@ namespace Ezreal.EasyPay.MergeChannels.CCB.Enums
         Json = 1,
         /// <summary>
         ///  2：返回聚合扫码页面二维码
+        /// <para>
+        /// 返回一个显示二维码的网页内容，没有PayUrl，参考Raw
+        /// </para>
         /// </summary>
-        QRCodeOfMergeChannelHtml=2,
+        QRCodeOfMergeChannelHtml = 2,
         /// <summary>
         ///  3：返回聚合扫码JSON格式【二维码信息串】
+        ///  <para>
+        ///  返回一个Json{succes:bool,payUlr:二维码的网页url}
+        /// </para>
         /// </summary>
         JsonWithQRCodeOfMergeChannelUrl = 3
-       
-       
+
+
     }
 }

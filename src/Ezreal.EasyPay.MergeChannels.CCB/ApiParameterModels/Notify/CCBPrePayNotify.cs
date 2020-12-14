@@ -31,43 +31,8 @@ namespace Ezreal.EasyPay.MergeChannels.CCB.ApiParameterModels.Notify
         /// </para>
         /// </summary>
         [SignOrder(2)]
-        public string ORDERID
-        {
-            get
-            {
-                if (string.IsNullOrWhiteSpace(MERCHANTID))
-                {
-                    throw new MemberAccessException($"{nameof(MERCHANTID)} not be null");
-                }
-                if (string.IsNullOrWhiteSpace(OrderIdSuffix))
-                {
-                    throw new MemberAccessException($"{nameof(OrderIdSuffix)} not be null");
-                }
-                if (MERCHANTID.Length != 15)
-                {
-                    throw new IndexOutOfRangeException($"length of {nameof(MERCHANTID)} must be 15");
-                }
-                return MERCHANTID + OrderIdSuffix;
-            }
-            set
-            {
-                if (string.IsNullOrWhiteSpace(value))
-                {
-                    throw new MemberAccessException($"{nameof(value)} not be null");
-                }
-                string orderIdPrefix = value.Substring(0, 15);
-                if (orderIdPrefix != MERCHANTID)
-                {
-                    throw new MemberAccessException($"{ nameof(value) } prefix must be MerchantId");
-                }
-                OrderIdSuffix = value.Substring(15, value.Length - 15);
-            }
-        }
-        /// <summary>
-        /// 订单后缀
-        /// </summary>
-        [IgnoreSerialized]
-        public string OrderIdSuffix { get; protected set; }
+        public string ORDERID { get; set; }
+
         /// <summary>
         /// 金额
         /// </summary>
@@ -116,7 +81,7 @@ namespace Ezreal.EasyPay.MergeChannels.CCB.ApiParameterModels.Notify
         /// 2.开关打开时，有此字段返回且参与验签。
         /// </para>
         /// </summary>
-        [SignOrder(11),IgnoreWhenNull]
+        [SignOrder(11), IgnoreWhenNull]
         public string REFERER { get; set; }
         /// <summary>
         /// 客户端IP

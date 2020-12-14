@@ -28,7 +28,7 @@ namespace ConsoleApp
                 ORDERID = DateTime.Now.ToString("yyyyMMddHHmmssf"),
                 RETURNTYPE = EnumReturnType.JsonWithQRCodeOfMergeChannelUrl
             };
-            CCBPrePayResponse result = await ccbPayClient.PrePay(new CCBSignSettings() { Last30BitsOfPublicKey = options.Last30OfPublicKey }, prePayRequest);
+            CCBPrePayResponse result = await ccbPayClient.PrePay(new CCBSignSettings() { Last30OfPublicKey = options.Last30OfPublicKey }, prePayRequest);
             string payurl = result.PAYURL;
             Console.ReadKey();
         }

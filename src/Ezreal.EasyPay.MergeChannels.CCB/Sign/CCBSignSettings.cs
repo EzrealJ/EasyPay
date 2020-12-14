@@ -11,6 +11,6 @@ namespace Ezreal.EasyPay.MergeChannels.CCB.Sign
         /// 柜台的公钥后30位,用于二维码接口(预支付创建订单)的签名
         /// </summary>
         [IgnoreSerialized]
-        public string Last30BitsOfPublicKey { get; set; }
+        public string Last30OfPublicKey { get; set; }
     }
 }

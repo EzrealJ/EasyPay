@@ -1,0 +1,70 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>发起预支付</title>
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/qrcodejs/1.0.0/qrcode.js"></script>
+</head>
+<body>
+    <table>
+        <tr>
+            <td>金额</td>
+            <td><input id="amount" type="text" value="0.01" /></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><button id="prePay">发起预支付</button></td>
+        </tr>
+    </table>
+    <div id="qrcode"></div>
+    <div id="showReturn"></div>
+    <script>
+        $(function () {
+            var qrcode = new QRCode(document.getElementById('qrcode'), {
+
+                width: 128,
+                height: 128,
+                colorDark: "#000000",
+                colorLight: "#ffffff",
+                correctLevel: QRCode.CorrectLevel.H
+            });
+            $("#prePay").click(function () {
+                var amount = $("#amount").val();
+                $.ajax({
+                    url: "/Pay/PrePay",
+                    method: "POST",
+                    data: JSON.stringify({ amount: parseFloat(amount) }),
+                    dataType: "json",
+                    contentType: "application/json",
+                    success: function (data) {
+                        console.log(data);
+                        if (data.type == "Redirect") {
+                            location.href = data.content.qrurl;
+                        }
+                        if (data.type == "MakeQR") {
+                            qrcode.makeCode(data.content.qrurl)
+                        }
+                        if (data.type == "ReWritDOM") {
+                            var $iframe = $("<iframe  />");
+                            $iframe.css({ position: "absolute", width: "0px", height: "0px", left: "-600px", top: "-600px" });
+                            $iframe.appendTo("body");
+                            var doc = $iframe[0].contentWindow.document;
+                            doc.write(data.content);
+                            doc.close();
+                            $iframe[0].contentWindow.focus();
+                        }
+
+                    }
+                });
+            });
+
+
+
+        });
+
+    </script>
+</body>
+</html>
