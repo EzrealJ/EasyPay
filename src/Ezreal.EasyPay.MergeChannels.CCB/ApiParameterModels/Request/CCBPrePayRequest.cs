@@ -29,7 +29,7 @@ namespace Ezreal.EasyPay.MergeChannels.CCB.ApiParameterModels.Request
 
 
         [SignOrder(6)]
-        public override string TXCODE { get; } = "530550";
+        public  string TXCODE { get; } = "530550";
         /// <summary>
         /// 订单Id
         /// <para>

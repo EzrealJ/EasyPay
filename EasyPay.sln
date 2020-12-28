@@ -25,7 +25,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ezreal.EasyPay.MergeChannel
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{E0607B65-5991-49F9-80AE-A9FC71525885}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CCBPayWebDemo", "demo\CCBPayWebDemo\CCBPayWebDemo.csproj", "{888BB528-D44A-485C-9094-29053F382A86}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CCBPayWebDemo", "demo\CCBPayWebDemo\CCBPayWebDemo.csproj", "{888BB528-D44A-485C-9094-29053F382A86}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Properties", "Properties", "{7681F9FD-E634-4656-9975-2F0EFA718998}"
+	ProjectSection(SolutionItems) = preProject
+		src\Properties\AssemblyDocument.props = src\Properties\AssemblyDocument.props
+		src\Properties\NugetInformation.props = src\Properties\NugetInformation.props
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -78,6 +84,7 @@ Global
 		{DC50755F-A8B5-44C2-A3AC-A8368BAE7D31} = {74D580D2-AA27-491B-949E-8E27675963C9}
 		{A14B87C3-EC1C-4023-9DA3-32532BA4D94E} = {74D580D2-AA27-491B-949E-8E27675963C9}
 		{888BB528-D44A-485C-9094-29053F382A86} = {D0E8B847-F5FA-432D-A7B6-150AD2003F3F}
+		{7681F9FD-E634-4656-9975-2F0EFA718998} = {74D580D2-AA27-491B-949E-8E27675963C9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {84003617-7667-4FBC-A922-C7003AF6CB4B}

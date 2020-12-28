@@ -10,11 +10,20 @@ namespace CCBPayWebDemo.Controllers
 {
     public class NotifyController : Controller
     {
-
-
-        [HttpPost("~/Notify/CCB")]
-        public async Task CCBNotify(CCBPrePayNotify notify)
+        [HttpGet("~/NotifyUrl/CBBPayNotifyUrl/{companyCode}")]
+        public async Task CCBNotifyGet(CCBPrePayNotify notify,[FromRoute]string companyCode)
         {
+            Console.WriteLine(companyCode);
+            Console.WriteLine("I m get");
+            Console.WriteLine(JsonConvert.SerializeObject(notify));
+            await Task.CompletedTask;
+        }
+
+        [HttpPost("~/NotifyUrl/CBBPayNotifyUrl/{companyCode}")]
+        public async Task CCBNotify(CCBPrePayNotify notify, [FromRoute] string companyCode)
+        {
+            Console.WriteLine(companyCode);
+            Console.WriteLine("I m post");
             Console.WriteLine(JsonConvert.SerializeObject(notify));
             await Task.CompletedTask;
         }

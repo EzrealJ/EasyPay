@@ -50,7 +50,7 @@ namespace CCBPayWebDemo.Controllers
                     if (result.SUCCESS && !string.IsNullOrWhiteSpace(result.PAYURL))
                     {
                         CCBGetMergeChannelRedirectResponse getMergeChannelRedirectResponse = await cCBPayContract.GetMergeChannelRedirectUrl(result.PAYURL);
-                        getMergeChannelRedirectResponse.QRURL = qrUrlPrefix+getMergeChannelRedirectResponse.QRURL;
+                        getMergeChannelRedirectResponse.QRURL = qrUrlPrefix + getMergeChannelRedirectResponse.QRURL;
                         return Json(new { Type = "MakeQR", Content = getMergeChannelRedirectResponse });
                     }
                     break;
@@ -70,6 +70,26 @@ namespace CCBPayWebDemo.Controllers
             }
 
             return Json(new { Type = "ReWritDOM", Content = result.Raw });
+        }
+
+        [HttpPost]
+        [CCBPayOptionsAsyncSetter]
+        public async Task<JsonResult> RefundAsync([FromServices] ICCBEBS5Contract cCBEBS5Contract,string ebsHttpEndpoint, [FromServices] CCBPayOptions options, [FromBody] CCBRefundRequest request)
+        {
+            CCBRefundRequest refundRequest = new CCBRefundRequest()
+            {
+                CUST_ID = options.MerchantId,
+                USER_ID = "",
+                PASSWORD = "",
+                REQUEST_SN = DateTime.Now.ToString("yyMMddHHmmssffff"),
+                TX_INFO = new CCBRefundRequest.Content
+                {
+                    ORDER = request.TX_INFO.ORDER,
+                    MONEY = request.TX_INFO.MONEY,
+                }
+            };
+            CCBRefundResponse result = await cCBEBS5Contract.Refund(ebsHttpEndpoint, new CCBEBS5HttpRequest<CCBRefundRequest>(refundRequest));
+            return Json(result);
         }
     }
 }

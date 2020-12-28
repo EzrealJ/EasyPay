@@ -1,10 +1,11 @@
 ﻿using System;
+using System.IO;
+using System.Text;
+using System.Xml.Serialization;
 using Ezreal.EasyPay.MergeChannels.CCB;
 using Ezreal.EasyPay.MergeChannels.CCB.ApiParameterModels.Request;
 using Ezreal.EasyPay.MergeChannels.CCB.ApiParameterModels.Response;
-using Ezreal.EasyPay.MergeChannels.CCB.Enums;
 using Ezreal.EasyPay.MergeChannels.CCB.HttpInterface;
-using Ezreal.EasyPay.MergeChannels.CCB.Sign;
 using WebApiClient;
 
 namespace ConsoleApp
@@ -13,24 +14,34 @@ namespace ConsoleApp
     {
         static async System.Threading.Tasks.Task Main(string[] args)
         {
-            HttpApi.Register<ICCBPayContract>();
-            ICCBPayContract ccbPayClient = HttpApi.Resolve<ICCBPayContract>();
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+            HttpApi.Register<ICCBEBS5Contract>();
+            ICCBEBS5Contract ccbPayClient = HttpApi.Resolve<ICCBEBS5Contract>();
 
             CCBPayOptions options = new CCBPayOptions();
 
 
-            CCBPrePayRequest prePayRequest = new CCBPrePayRequest()
+            while(true)
             {
-                MERCHANTID = options.MerchantId,
-                POSID = options.PosId,
-                BRANCHID = options.BranchId,
-                PAYMENT = 0.01m,
-                ORDERID = DateTime.Now.ToString("yyyyMMddHHmmssf"),
-                RETURNTYPE = EnumReturnType.JsonWithQRCodeOfMergeChannelUrl
-            };
-            CCBPrePayResponse result = await ccbPayClient.PrePay(new CCBSignSettings() { Last30OfPublicKey = options.Last30OfPublicKey }, prePayRequest);
-            string payurl = result.PAYURL;
-            Console.ReadKey();
+                Func<string> y = () => { Console.WriteLine("请输入退款订单"); return Console.ReadLine(); };
+                Func<decimal> x = () => { Console.WriteLine("请输入退款金额"); return decimal.Parse(Console.ReadLine()); };
+               
+                CCBRefundRequest refundRequest = new CCBRefundRequest()
+                {
+                    CUST_ID = options.MerchantId,
+                    USER_ID = "",
+                    PASSWORD = "",
+                    REQUEST_SN = DateTime.Now.ToString("yyMMddHHmmssffff"),
+                    TX_INFO = new CCBRefundRequest.Content
+                    {
+                        ORDER = y.Invoke(),
+                        MONEY = x.Invoke(),                 
+                    }
+                };
+                CCBRefundResponse result = await ccbPayClient.Refund(ebsHttpEndpoint: "http://192.168.0.205:30001", new CCBEBS5HttpRequest<CCBRefundRequest>(refundRequest));
+                Console.ReadKey();
+            }
+          
         }
     }
 }

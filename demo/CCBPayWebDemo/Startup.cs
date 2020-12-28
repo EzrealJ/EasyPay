@@ -26,8 +26,9 @@ namespace CCBPayWebDemo
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            services.AddScoped<CCBPayOptions>();//注册为Scope即可和Http请求关联，灵活的应对多商户的常见，每个商户都可以在请求中单独配置
+            services.AddScoped<CCBPayOptions>();//注册为Scope即可和Http请求关联，灵活的应对多商户的场景，每个商户都可以在请求中单独配置
             services.AddHttpApi<ICCBPayContract>();
+            services.AddHttpApi<ICCBEBS5Contract>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

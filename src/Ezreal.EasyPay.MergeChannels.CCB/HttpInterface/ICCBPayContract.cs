@@ -61,5 +61,7 @@ namespace Ezreal.EasyPay.MergeChannels.CCB.HttpInterface
             [PathQuery] CCBReversePayRequest request,
             [Timeout] TimeSpan? timeout = null,
             CancellationToken cancellationToken = default);
+
+
     }
 }
