@@ -10,7 +10,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Ezreal.EasyPay.Common\Ezreal.EasyPay.Common.csproj" />
     <ProjectReference Include="..\..\src\Ezreal.EasyPay.MergeChannels.CCB\Ezreal.EasyPay.MergeChannels.CCB.csproj" />
   </ItemGroup>
 

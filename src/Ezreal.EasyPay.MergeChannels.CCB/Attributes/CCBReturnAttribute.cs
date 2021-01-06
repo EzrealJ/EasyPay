@@ -4,7 +4,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
-using Ezreal.EasyPay.MergeChannels.CCB.ApiParameterModels.Response;
+using Ezreal.EasyPay.MergeChannels.CCB.ApiModels.Response;
 using WebApiClient.Attributes;
 using WebApiClient.Contexts;
 

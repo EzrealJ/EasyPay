@@ -1,5 +1,5 @@
-﻿using Ezreal.EasyPay.WeChat.ApiParameterModels.Request;
-using Ezreal.EasyPay.WeChat.ApiParameterModels.Response;
+﻿using Ezreal.EasyPay.WeChat.ApiModels.Request;
+using Ezreal.EasyPay.WeChat.ApiModels.Response;
 using Ezreal.EasyPay.WeChat.Attributes;
 using Ezreal.EasyPay.WeChat.Sign;
 using System;
@@ -16,7 +16,7 @@ namespace Ezreal.EasyPay.WeChat.ApiContract
 {
     [HttpHost("https://api.mch.weixin.qq.com/")]
     [Ezreal.EasyPay.WeChat.Filter.WeChatSignFilter]
-    public interface IWeChatPayContract : IHttpApi
+    public interface IWeChatPayContract : IWeChatPayApiContract
     {
         [HttpPost("pay/micropay")]
         [WeChatPayXmlReturn]

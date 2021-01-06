@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
-using Ezreal.EasyPay.MergeChannels.CCB.ApiParameterModels.Request;
-using Ezreal.EasyPay.MergeChannels.CCB.ApiParameterModels.Response;
+using Ezreal.EasyPay.MergeChannels.CCB.ApiModels.Request;
+using Ezreal.EasyPay.MergeChannels.CCB.ApiModels.Response;
 using WebApiClient;
 using WebApiClient.Attributes;
 

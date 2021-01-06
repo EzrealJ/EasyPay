@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
-using Ezreal.EasyPay.WeChat.ApiParameterModels.Request;
-using Ezreal.EasyPay.WeChat.ApiParameterModels.Response;
+using Ezreal.EasyPay.WeChat.ApiModels.Request;
+using Ezreal.EasyPay.WeChat.ApiModels.Response;
 using Ezreal.EasyPay.WeChat.Attributes;
 using Ezreal.EasyPay.WeChat.Sign;
 using WebApiClient;
@@ -13,7 +13,7 @@ namespace Ezreal.EasyPay.WeChat.ApiContract
 {
     [HttpHost("https://payapp.weixin.qq.com/")]
     [Ezreal.EasyPay.WeChat.Filter.WeChatSignFilter]
-    public interface IWeChatPayAuthContract : IHttpApi
+    public interface IWeChatPayAuthContract : IWeChatPayApiContract
     {
         [HttpPost("face/get_wxpayface_authinfo")]
         [WeChatPayXmlReturn]

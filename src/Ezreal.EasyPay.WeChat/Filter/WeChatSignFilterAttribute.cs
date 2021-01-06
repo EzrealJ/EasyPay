@@ -1,5 +1,6 @@
 ﻿using Ezreal.EasyPay.Abstractions.Filter;
 using Ezreal.EasyPay.Common;
+using Ezreal.EasyPay.Extensions;
 using Ezreal.EasyPay.WeChat.Sign;
 using System.Collections.Generic;
 using System.Linq;

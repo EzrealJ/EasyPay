@@ -4,13 +4,12 @@
   <Import Project="..\Properties\AssemblyDocument.props" />
 
   <ItemGroup>
-    <ProjectReference Include="..\Ezreal.EasyPay.Abstractions\Ezreal.EasyPay.Abstractions.csproj" />
-    <ProjectReference Include="..\Ezreal.EasyPay.Common\Ezreal.EasyPay.Common.csproj" />
+    <ProjectReference Include="..\Ezreal.EasyPay.Abstractions\Ezreal.EasyPay.Abstractions.csproj" PrivateAssets="all" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ApiParameterModels\Request\" />
-    <Folder Include="ApiParameterModels\Response\" />
+    <Folder Include="ApiModels\Request\" />
+    <Folder Include="ApiModels\Response\" />
     <Folder Include="Api\" />
     <Folder Include="Attributes\" />
     <Folder Include="Domain\" />

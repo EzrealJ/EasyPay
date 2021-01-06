@@ -3,8 +3,8 @@ using System.IO;
 using System.Text;
 using System.Xml.Serialization;
 using Ezreal.EasyPay.MergeChannels.CCB;
-using Ezreal.EasyPay.MergeChannels.CCB.ApiParameterModels.Request;
-using Ezreal.EasyPay.MergeChannels.CCB.ApiParameterModels.Response;
+using Ezreal.EasyPay.MergeChannels.CCB.ApiModels.Request;
+using Ezreal.EasyPay.MergeChannels.CCB.ApiModels.Response;
 using Ezreal.EasyPay.MergeChannels.CCB.HttpInterface;
 using WebApiClient;
 

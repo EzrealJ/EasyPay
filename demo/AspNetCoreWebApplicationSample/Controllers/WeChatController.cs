@@ -1,7 +1,7 @@
 ﻿using Ezreal.EasyPay.WeChat.Api;
 using Ezreal.EasyPay.WeChat.ApiContract;
-using Ezreal.EasyPay.WeChat.ApiParameterModels.Request;
-using Ezreal.EasyPay.WeChat.ApiParameterModels.Response;
+using Ezreal.EasyPay.WeChat.ApiModels.Request;
+using Ezreal.EasyPay.WeChat.ApiModels.Response;
 using Ezreal.EasyPay.WeChat.Sign;
 using Microsoft.AspNetCore.Mvc;
 using System;

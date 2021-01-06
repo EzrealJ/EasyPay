@@ -1,5 +1,5 @@
 ﻿using Ezreal.EasyPay.Abstractions.Exceptions;
-using Ezreal.EasyPay.WeChat.ApiParameterModels.Response;
+using Ezreal.EasyPay.WeChat.ApiModels.Response;
 using Ezreal.EasyPay.WeChat.Sign;
 using System;
 using System.Collections.Generic;
@@ -25,7 +25,7 @@ namespace Ezreal.EasyPay.WeChat.Attributes
             IEnumerable<XElement> elements = XDocument.Parse(xml)?.Root?.Elements();
             if (elements != null && elements.Any())
             {
-                if (result is WeChat.ApiParameterModels.Response.WeChatPayResponse weChatPayResponse)
+                if (result is WeChat.ApiModels.Response.WeChatPayResponse weChatPayResponse)
                 {
                     weChatPayResponse.OriginalContent = xml;
                 }

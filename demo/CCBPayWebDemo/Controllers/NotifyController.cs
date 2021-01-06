@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
-using Ezreal.EasyPay.MergeChannels.CCB.ApiParameterModels.Notify;
+using Ezreal.EasyPay.MergeChannels.CCB.ApiModels.Notify;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 

@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Ezreal.EasyPay.Abstractions.ApiParameterModels;
+using Ezreal.EasyPay.Abstractions.ApiModels;
 using Ezreal.EasyPay.Abstractions.Attributes;
 using Ezreal.EasyPay.Abstractions.Filter;
-using Ezreal.EasyPay.MergeChannels.CCB.ApiParameterModels;
+using Ezreal.EasyPay.MergeChannels.CCB.ApiModels;
 using Ezreal.EasyPay.MergeChannels.CCB.Sign;
 using WebApiClient.Contexts;
 
