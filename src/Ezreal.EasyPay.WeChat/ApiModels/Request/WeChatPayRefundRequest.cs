@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Xml.Serialization;
 using Ezreal.EasyPay.WeChat.ApiModels.Response;
@@ -36,11 +37,28 @@ namespace Ezreal.EasyPay.WeChat.ApiModels.Request
         public int TotalFee { get; set; }
 
         /// <summary>
+        /// 以元计的总金额
+        /// <para>
+        /// 对其设置会更改<see cref="TotalFee"/>,同理<see cref="TotalFee"/>值的更改也会影响本属性的值
+        /// </para>
+        /// </summary>
+        [XmlIgnore]
+        public decimal TotalFeeDecimal { get => Convert.ToDecimal(TotalFee) / 100; set => TotalFee = (int)(100 * value); }
+
+        /// <summary>
         /// 申请退款金额
         /// </summary>
         [XmlElement("refund_fee")]
         public int RefundFee { get; set; }
 
+        /// <summary>
+        /// 以元计的退款金额
+        /// <para>
+        /// 对其设置会更改<see cref="RefundFee"/>,同理<see cref="RefundFee"/>值的更改也会影响本属性的值
+        /// </para>
+        /// </summary>
+        [XmlIgnore]
+        public decimal RefundFeeDecimal { get => Convert.ToDecimal(RefundFee) / 100; set => RefundFee = (int)(100 * value); }
         /// <summary>
         /// 退款货币种类
         /// </summary>

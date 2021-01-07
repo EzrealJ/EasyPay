@@ -4,7 +4,7 @@
   <Import Project="..\Properties\AssemblyDocument.props" />
 
   <ItemGroup>
-    <ProjectReference Include="..\Ezreal.EasyPay.Abstractions\Ezreal.EasyPay.Abstractions.csproj" PrivateAssets="all"/>
+    <ProjectReference Include="..\Ezreal.EasyPay.Abstractions\Ezreal.EasyPay.Abstractions.csproj"/>
   </ItemGroup>
 
 

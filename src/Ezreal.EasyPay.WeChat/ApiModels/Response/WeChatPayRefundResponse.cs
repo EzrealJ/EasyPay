@@ -94,13 +94,13 @@ namespace Ezreal.EasyPay.WeChat.ApiModels.Response
         /// 申请退款金额	
         /// </summary>
         [XmlElement("refund_fee")]
-        public string RefundFee { get; set; }
+        public int RefundFee { get; set; }
 
         /// <summary>
         /// 退款金额	
         /// </summary>
         [XmlElement("settlement_refund_fee")]
-        public string SettlementRefundFee { get; set; }
+        public int SettlementRefundFee { get; set; }
 
         /// <summary>
         /// 订单金额	
