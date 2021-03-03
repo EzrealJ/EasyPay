@@ -1,13 +1,10 @@
-﻿using Ezreal.EasyPay.WeChat.Api;
-using Ezreal.EasyPay.WeChat.ApiContract;
+﻿using System;
+using System.Linq;
+using System.Threading.Tasks;
 using Ezreal.EasyPay.WeChat.ApiModels.Request;
 using Ezreal.EasyPay.WeChat.ApiModels.Response;
 using Ezreal.EasyPay.WeChat.Sign;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace AspNetCoreWebApplicationSample.Controllers
 {

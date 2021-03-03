@@ -4,6 +4,7 @@ using System.Text;
 using System.Threading;
 using Ezreal.EasyPay.MergeChannels.CCB.ApiModels.Request;
 using Ezreal.EasyPay.MergeChannels.CCB.ApiModels.Response;
+using Ezreal.EasyPay.MergeChannels.CCB.Attributes;
 using WebApiClient;
 using WebApiClient.Attributes;
 
@@ -14,10 +15,10 @@ namespace Ezreal.EasyPay.MergeChannels.CCB.HttpInterface
     public interface ICCBEBS5Contract : IHttpApi
     {
         [HttpPost]
-        [XmlReturn(EnsureSuccessStatusCode = false)]
+        [CCBXMLRetuen(EnsureSuccessStatusCode = false)]
         ITask<CCBRefundResponse> Refund(
             [Uri] string ebsHttpEndpoint,
-            [FormContent] CCBEBS5HttpRequest<CCBRefundRequest> request,
+            [HttpContent] CCBEBS5HttpRequest<CCBRefundRequest> request,
             [Timeout] TimeSpan? timeout = null,
             CancellationToken cancellationToken = default);
     }
