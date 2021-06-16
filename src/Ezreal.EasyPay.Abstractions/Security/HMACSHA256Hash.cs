@@ -20,7 +20,7 @@ namespace Ezreal.EasyPay.Common.Security
 
 
         /// <summary>
-        /// MD5哈希加密为Base64字符串
+        /// HMACSHA256哈希加密为Base64字符串
         /// </summary>
         /// <param name="value"></param>
         /// <param name="key"></param>
@@ -32,9 +32,10 @@ namespace Ezreal.EasyPay.Common.Security
             {
                 throw new ArgumentException("message", nameof(encoding));
             }
-            using (HMACSHA256 hmacSha256 = new HMACSHA256(Encoding.UTF8.GetBytes(key)))
+            Encoding en = Encoding.GetEncoding(encoding);
+            using (HMACSHA256 hmacSha256 = new HMACSHA256(en.GetBytes(key)))
             {
-                byte[] hash = hmacSha256.ComputeHash(Encoding.GetEncoding(encoding).GetBytes(value));
+                byte[] hash = hmacSha256.ComputeHash(en.GetBytes(value));
                 return Convert.ToBase64String(hash);
             }
         }

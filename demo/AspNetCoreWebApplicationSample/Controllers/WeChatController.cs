@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Ezreal.EasyPay.WeChat.ApiContract;
 using Ezreal.EasyPay.WeChat.ApiModels.Request;
 using Ezreal.EasyPay.WeChat.ApiModels.Response;
 using Ezreal.EasyPay.WeChat.Sign;
@@ -11,20 +12,20 @@ namespace AspNetCoreWebApplicationSample.Controllers
     [Route("[controller]")]
     public class WeChatController : Controller
     {
-        private readonly WeChatPayClient _weChatPayClient;
+        private readonly IWeChatPayContract _weChatPayClient;
 
-        public WeChatController(WeChatPayClient weChatPayClient)
+        public WeChatController(IWeChatPayContract weChatPayClient)
         {
             this._weChatPayClient = weChatPayClient;
         }
 
         [HttpPost(nameof(FacePayAuth))]
-        public async Task<WeChatPayFacePayAuthResponse> FacePayAuth([FromQuery]WeChatSignSettings weChatSignSettings, [FromBody]WeChatPayFacePayAuthRequest microPayRequest)
+        public async Task<WeChatPayFacePayAuthResponse> FacePayAuth([FromServices] IWeChatPayAuthContract weChatPayAuthContract, [FromQuery] WeChatSignSettings weChatSignSettings, [FromBody] WeChatPayFacePayAuthRequest microPayRequest)
         {
             try
             {
 
-                WeChatPayFacePayAuthResponse result = await _weChatPayClient.FacePayAuth(microPayRequest, weChatSignSettings);
+                WeChatPayFacePayAuthResponse result = await weChatPayAuthContract.FacePayAuth(weChatSignSettings, microPayRequest);
 
                 return result;
             }
@@ -43,13 +44,13 @@ namespace AspNetCoreWebApplicationSample.Controllers
         /// <param name="microPayRequest"></param>
         /// <returns></returns>
         [HttpPost(nameof(MicroPay))]
-        public async Task<WeChatPayMicroPayResponse> MicroPay([FromQuery]WeChatSignSettings weChatSignSettings, [FromBody]WeChatPayMicroPayRequest microPayRequest)
+        public async Task<WeChatPayMicroPayResponse> MicroPay([FromQuery] WeChatSignSettings weChatSignSettings, [FromBody] WeChatPayMicroPayRequest microPayRequest)
         {
             try
             {
 
-                WeChatPayMicroPayResponse result = await _weChatPayClient.MicroPay(microPayRequest, weChatSignSettings);
-                WeChatPayReverseResponse a = await _weChatPayClient.Reverse(new WeChatPayReverseRequest()
+                WeChatPayMicroPayResponse result = await _weChatPayClient.MicroPay(weChatSignSettings,microPayRequest);
+                WeChatPayReverseResponse a = await _weChatPayClient.Reverse(weChatSignSettings,new WeChatPayReverseRequest()
                 {
                     OutTradeNo = result.OutTradeNo,
                     SubMchId = result.SubMchId,
@@ -71,12 +72,12 @@ namespace AspNetCoreWebApplicationSample.Controllers
         /// <param name="refundRequest"></param>
         /// <returns></returns>
         [HttpPost(nameof(Refund))]
-        public async Task<WeChatPayRefundResponse> Refund([FromQuery]WeChatSignSettings weChatSignSettings, [FromBody]WeChatPayRefundRequest refundRequest)
+        public async Task<WeChatPayRefundResponse> Refund([FromQuery] WeChatSignSettings weChatSignSettings, [FromBody] WeChatPayRefundRequest refundRequest)
         {
             try
             {
 
-                WeChatPayRefundResponse result = await _weChatPayClient.Refund(refundRequest, weChatSignSettings);
+                WeChatPayRefundResponse result = await _weChatPayClient.Refund( weChatSignSettings, refundRequest);
                 return result;
             }
             catch (Exception ex)

@@ -2,6 +2,7 @@
 using System.IO;
 using System.Text;
 using System.Xml.Serialization;
+using Ezreal.EasyPay.Common.Security;
 using Ezreal.EasyPay.MergeChannels.CCB;
 using Ezreal.EasyPay.MergeChannels.CCB.ApiModels.Request;
 using Ezreal.EasyPay.MergeChannels.CCB.ApiModels.Response;
@@ -14,6 +15,26 @@ namespace ConsoleApp
     {
         static async System.Threading.Tasks.Task Main(string[] args)
         {
+          string ss=  HMACSHA256Hash.HashToBase64("https://octodex.github.com/images/codercat.jpg", "secretkey");
+
+            Console.WriteLine(ss);
+            Console.ReadKey();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
             HttpApi.Register<ICCBEBS5Contract>();
             ICCBEBS5Contract ccbPayClient = HttpApi.Resolve<ICCBEBS5Contract>();
